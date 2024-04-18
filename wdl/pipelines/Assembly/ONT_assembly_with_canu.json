@@ -1,0 +1,13 @@
+{
+  "ONTAssembleWithCanu.fastq": "/home/dieterbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
+  "ONTAssembleWithCanu.out_root_dir": "out",
+  "ONTAssembleWithCanu.trim_error_rate": 0.15,
+  "ONTAssembleWithCanu.genome_size": 3900000,
+  "ONTAssembleWithCanu.correct_error_rate": 0.15,
+  "ONTAssembleWithCanu.prefix": "asm",
+  "ONTAssembleWithCanu.assemble_error_rate": 0.15,
+  "ONTAssembleWithCanu.participant_name": "Dieter",
+  "ONTAssembleWithCanu.ref_map_file": "/home/dieterbest/Analysis/nanopore/data/ncbi_dataset/data/GCA_000789395.1/GCA_000789395.1_ASM78939v1_genomic.fna",
+  "ONTAssembleWithCanu.medaka_model": "r941_prom_high_g360"
+}
+

@@ -1,0 +1,7 @@
+{
+  "ONT_assemble_with_flye.genome_size": 3900000,
+  "ONT_assemble_with_flye.fastq": "/home/dieterbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
+  "ONT_assemble_with_flye.prefix": "test",
+  "ONT_assemble_with_flye.out_root_dir": "pipeline"
+}
+
