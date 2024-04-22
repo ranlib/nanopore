@@ -68,7 +68,6 @@ task MedakaPolish {
       preemptible_tries:      0,
       max_retries:            0,
       docker:                 "dbest/medaka:v0.1.0"
-      #docker:                 "us.gcr.io/broad-dsp-lrma/lr-medaka:0.1.0"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
