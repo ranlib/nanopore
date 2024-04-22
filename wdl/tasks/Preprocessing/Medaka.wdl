@@ -61,13 +61,14 @@ task MedakaPolish {
 
     ###################
     RuntimeAttr default_attr = object {
-        cpu_cores:              8,
-        mem_gb:                 24,
-        disk_gb:                disk_size,
-        boot_disk_gb:           10,
-        preemptible_tries:      0,
-        max_retries:            0,
-        docker:                 "us.gcr.io/broad-dsp-lrma/lr-medaka:0.1.0"
+      cpu_cores:              8,
+      mem_gb:                 24,
+      disk_gb:                disk_size,
+      boot_disk_gb:           10,
+      preemptible_tries:      0,
+      max_retries:            0,
+      docker:                 "dbest/medaka:v0.1.0"
+      #docker:                 "us.gcr.io/broad-dsp-lrma/lr-medaka:0.1.0"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -79,7 +80,6 @@ task MedakaPolish {
         maxRetries:             select_first([runtime_attr.max_retries, default_attr.max_retries])
         gpuType:                "nvidia-tesla-t4"
         gpuCount:               1
-        nvidiaDriverVersion:    "418.152.00"
         zones:                  ["us-east1-c"]
         cpuPlatform:            "Intel Haswell"
         docker:                 select_first([runtime_attr.docker, default_attr.docker])
