@@ -63,7 +63,7 @@ task Quast {
         boot_disk_gb:          10,
         preemptible_tries:     0,
         max_retries:           0,
-        docker:                "us.gcr.io/broad-dsp-lrma/lr-quast:5.2.0"
+        docker:                "dbest/quast:5.2.0"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -113,6 +113,6 @@ task SummarizeQuastReport {
 
     runtime {
         disks: "local-disk 100 HDD"
-        docker: "gcr.io/cloud-marketplace/google/ubuntu2004:latest"
+        docker: "ubuntu:22.0
     }
 }
