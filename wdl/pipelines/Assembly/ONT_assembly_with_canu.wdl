@@ -7,7 +7,7 @@ workflow ONTAssembleWithCanu {
         description: "A workflow that performs single sample genome assembly on ONT reads from one or more flow cells. The workflow merges multiple samples into a single BAM prior to genome assembly and variant calling."
     }
     parameter_meta {
-        fastq:       "GCS path to unaligned CCS BAM files"
+        fastq:       "path to unaligned CCS BAM files"
 
         ref_map_file:        "table indicating reference sequence and auxillary file locations"
 
@@ -19,7 +19,7 @@ workflow ONTAssembleWithCanu {
         participant_name:    "name of the participant from whom these samples were obtained"
         prefix:              "prefix for output files"
 
-        gcs_out_root_dir:    "GCS bucket to store the reads, variants, and metrics files"
+        out_root_dir:    "directory to store the reads, variants, and metrics files"
     }
 
     input {
@@ -38,8 +38,6 @@ workflow ONTAssembleWithCanu {
       String out_root_dir
     }
 
-    #Map[String, String] ref_map = read_map(ref_map_file)
-
     String outdir = out_root_dir + "/ONTAssembleWithCanu/~{prefix}"
 
     call Canu.Canu {
@@ -52,31 +50,30 @@ workflow ONTAssembleWithCanu {
             assemble_error_rate = assemble_error_rate
     }
 
-    # call Medaka.MedakaPolish {
-    #     input:
-    #         basecalled_reads = MergeFastqs.merged_fastq,
-    #         draft_assembly = Canu.fa,
-    #         model = medaka_model,
-    #         prefix = basename(Canu.fa, ".fasta") + ".polished",
-    #         n_rounds = 3
-    # }
+    call Medaka.MedakaPolish {
+        input:
+            basecalled_reads = fastq,
+            draft_assembly = Canu.fa,
+            model = medaka_model,
+            prefix = basename(Canu.fa, ".fasta") + ".polished",
+            n_rounds = 3
+    }
 
     # call Quast.Quast {
     #     input:
-    #         ref = ref_map['fasta'],
+    #         ref = ref_map_file,
     #         assemblies = [ MedakaPolish.polished_assembly ]
     # }
 
-    # call AV.CallAssemblyVariants {
-    #     input:
-    #         asm_fasta = MedakaPolish.polished_assembly,
-    #         ref_fasta = ref_map['fasta'],
-    #         participant_name = participant_name,
-    #         prefix = prefix + ".canu"
-    # }
+    call AV.CallAssemblyVariants {
+        input:
+            asm_fasta = MedakaPolish.polished_assembly,
+            ref_fasta = ref_map_file,
+            participant_name = participant_name,
+            prefix = prefix + ".canu"
+    }
 
     output {
-        #File asm_unpolished = FinalizeAsmUnpolished.gcs_path
         File asm_polished = Canu.fa
     }
 }
