@@ -13,7 +13,6 @@ task MedakaPolish {
     prefix:             "prefix for output files"
     model:              "run `medaka tools list_models` and pick string with the correct pore type, machine, and guppy version"
     n_rounds:           "number of polishing rounds to apply"
-    n_cpu: "number of cores o use"
   }
     
   input {
@@ -22,11 +21,11 @@ task MedakaPolish {
     String prefix = "consensus"
     String model = "r941_prom_high_g360"
     Int n_rounds = 1
-    Int n_cpu = 1
     RuntimeAttr? runtime_attr_override
   }
   
   Int disk_size = 4 * n_rounds * ceil(size([basecalled_reads, draft_assembly], "GB"))
+  Int n_cores = select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
   
   ###
   # Medaka models
@@ -38,7 +37,6 @@ task MedakaPolish {
   #            r941_prom_snp_g303, r941_prom_snp_g322, r941_prom_snp_g360,
   #            r941_prom_variant_g303, r941_prom_variant_g322, r941_prom_variant_g360
   ###
-  
   command <<<
     source /medaka/venv/bin/activate
     
@@ -49,7 +47,7 @@ task MedakaPolish {
     
     for i in {1..~{n_rounds}}
     do
-    medaka_consensus -i ~{basecalled_reads} -d output_$((i-1))_rounds/consensus.fasta -o output_${i}_rounds -t ~{n_cpu} -m ~{model}
+    medaka_consensus -i ~{basecalled_reads} -d output_$((i-1))_rounds/consensus.fasta -o output_${i}_rounds -t ~{n_cores} -m ~{model}
     done
     
     cp output_~{n_rounds}_rounds/consensus.fasta ~{prefix}.fasta
