@@ -31,7 +31,7 @@ task Quast {
         num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
 
         quast --no-icarus \
-              "~{size_optimization}" \
+              ~{size_optimization} \
               --threads "${num_core}" \
               ~{true='-r' false='' defined(ref)} \
               ~{select_first([ref, ""])} \
@@ -113,6 +113,6 @@ task SummarizeQuastReport {
 
     runtime {
         disks: "local-disk 100 HDD"
-        docker: "ubuntu:22.0
+        docker: "ubuntu:22.04"
     }
 }
