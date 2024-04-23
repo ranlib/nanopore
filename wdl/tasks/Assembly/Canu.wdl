@@ -79,7 +79,7 @@ task Correct {
 
         canu -correct \
              -p ~{prefix} -d canu_correct_output \
-             genomeSize=~{genome_size}m \
+             genomeSize=~{genome_size} \
              corMaxEvidenceErate=0.15 \
              correctedErrorRate=~{error_rate} \
              -nanopore \
@@ -137,7 +137,7 @@ task Trim {
 
        canu -trim \
             -p ~{prefix} -d canu_trim_output \
-            genomeSize=~{genome_size}m \
+            genomeSize=~{genome_size} \
             correctedErrorRate=~{error_rate} \
             -nanopore-corrected \
             ~{corrected_reads}
@@ -194,7 +194,7 @@ task Assemble {
 
         canu -assemble \
              -p ~{prefix} -d canu_assemble_output \
-             genomeSize=~{genome_size}m \
+             genomeSize=~{genome_size} \
              correctedErrorRate=~{error_rate} \
              -nanopore-corrected \
              ~{trimmed_reads}
