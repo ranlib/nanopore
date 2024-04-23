@@ -1,6 +1,9 @@
 version 1.0
 
 import "../../tasks/Assembly/Canu.wdl" as Canu
+import "../../tasks/Preprocessing/Medaka.wdl" as Medaka
+import "../../tasks/QC/Quast.wdl" as Quast
+import "../../tasks/VariantCalling/CallAssemblyVariants.wdl" as AV
 
 workflow ONTAssembleWithCanu {
     meta {
@@ -59,11 +62,11 @@ workflow ONTAssembleWithCanu {
             n_rounds = 3
     }
 
-    # call Quast.Quast {
-    #     input:
-    #         ref = ref_map_file,
-    #         assemblies = [ MedakaPolish.polished_assembly ]
-    # }
+    call Quast.Quast {
+        input:
+            ref = ref_map_file,
+            assemblies = [ MedakaPolish.polished_assembly ]
+    }
 
     call AV.CallAssemblyVariants {
         input:
