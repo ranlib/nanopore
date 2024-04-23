@@ -1,10 +1,13 @@
 {
-    "ONT_assembly_with_flye.genome_size": 3900000,
-    "ONT_assembly_with_flye.fastq": "/home/dbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
-    "ONT_assembly_with_flye.prefix": "test",
-    "ONT_assembly_with_flye.out_root_dir": "pipeline",
-    "ONT_assembly_with_flye.participant_name": "Dieter",
+    "ONT_assembly_with_flye.n_rounds": 1,
     "ONT_assembly_with_flye.ref_map_file": "/home/dbest/Analysis/nanopore/data/GCF_000789395.1_ASM78939v1_genomic.fna",
-    "ONT_assembly_with_flye.medaka_model": "r941_prom_high_g360"
+    "ONT_assembly_with_flye.participant_name": "Dieter",
+    "ONT_assembly_with_flye.out_root_dir": "pipeline",
+    "ONT_assembly_with_flye.Quast.runtime_attr_override": {"cpu_cores": 2},
+    "ONT_assembly_with_flye.fastq": "/home/dbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
+    "ONT_assembly_with_flye.Quast.is_large": false,
+    "ONT_assembly_with_flye.MedakaPolish.runtime_attr_override": {"cpu_cores": 2},
+    "ONT_assembly_with_flye.prefix": "test",
+    "ONT_assembly_with_flye.medaka_model": "r941_prom_high_g360",
+    "ONT_assembly_with_flye.genome_size": 3900000
 }
-
