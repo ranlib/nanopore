@@ -1,13 +1,13 @@
 {
-  "ONTAssembleWithCanu.fastq": "/home/dbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
-  "ONTAssembleWithCanu.out_root_dir": "out",
-  "ONTAssembleWithCanu.trim_error_rate": 0.15,
-  "ONTAssembleWithCanu.genome_size": 3900000,
-  "ONTAssembleWithCanu.correct_error_rate": 0.15,
-  "ONTAssembleWithCanu.prefix": "asm",
-  "ONTAssembleWithCanu.assemble_error_rate": 0.15,
-  "ONTAssembleWithCanu.participant_name": "Dieter",
-  "ONTAssembleWithCanu.ref_map_file": "/home/dbest/Analysis/nanopore/data/GCF_000789395.1_ASM78939v1_genomic.fna",
-  "ONTAssembleWithCanu.medaka_model": "r941_prom_high_g360"
+    "ONTAssembleWithCanu.fastq": "/home/dbest/Analysis/nanopore/data/SRR7530167_10percent.fastq.gz",
+    "ONTAssembleWithCanu.out_root_dir": "out",
+    "ONTAssembleWithCanu.trim_error_rate": 0.15,
+    "ONTAssembleWithCanu.MedakaPolish.runtime_attr_override": { "cpu_cores": 2},
+    "ONTAssembleWithCanu.genome_size": 3900000,
+    "ONTAssembleWithCanu.correct_error_rate": 0.15,
+    "ONTAssembleWithCanu.prefix": "asm",
+    "ONTAssembleWithCanu.assemble_error_rate": 0.15,
+    "ONTAssembleWithCanu.participant_name": "Dieter",
+    "ONTAssembleWithCanu.ref_map_file": "/home/dbest/Analysis/nanopore/data/GCF_000789395.1_ASM78939v1_genomic.fna",
+    "ONTAssembleWithCanu.medaka_model": "r941_prom_high_g360"
 }
-
