@@ -181,7 +181,6 @@ task CirclatorVersion {
     }
 }
 
-# Workflow
 workflow CirclatorWorkflow {
     input {
         String command
