@@ -63,7 +63,7 @@ task Quast {
         boot_disk_gb:          10,
         preemptible_tries:     0,
         max_retries:           0,
-        docker:                "dbest/quast:5.2.0"
+        docker:                "dbest/quast:v5.2.0"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
