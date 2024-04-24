@@ -1,6 +1,21 @@
 version 1.0
 
-# Define inputs
+task CirclatorAll {
+    input {
+        Array[String] options
+        Array[String] required_arguments
+    }
+
+    command {
+        circlator all ${options} ${required_arguments}
+    }
+
+    runtime {
+        docker: "sangerpathogens/circlator:latest"
+    }
+}
+
+
 task CirclatorMapReads {
     input {
         Array[String] options
@@ -12,7 +27,7 @@ task CirclatorMapReads {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -27,7 +42,7 @@ task CirclatorBam2Reads {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -42,7 +57,7 @@ task CirclatorAssemble {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -57,7 +72,7 @@ task CirclatorMerge {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -72,7 +87,7 @@ task CirclatorClean {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -87,7 +102,7 @@ task CirclatorFixStart {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -102,7 +117,7 @@ task CirclatorMinimus2 {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -117,7 +132,7 @@ task CirclatorGetDnaA {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -132,7 +147,7 @@ task CirclatorProgCheck {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -147,7 +162,7 @@ task CirclatorTest {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
@@ -162,7 +177,7 @@ task CirclatorVersion {
     }
 
     runtime {
-        docker: "dbest/circulator:v1.0"
+        docker: "sangerpathogens/circlator:latest"
     }
 }
 
