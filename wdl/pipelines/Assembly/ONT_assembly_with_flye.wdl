@@ -22,7 +22,7 @@ workflow ONT_assembly_with_flye {
   
   input {
     File fastq
-    String medaka_model = "r941_prom_high_g360"
+    String medaka_model = "r941_min_high_g360"
     String prefix
     File ref_map_file
     String participant_name
