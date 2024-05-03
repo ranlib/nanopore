@@ -27,16 +27,6 @@ task MedakaPolish {
   Int disk_size = 4 * n_rounds * ceil(size([basecalled_reads, draft_assembly], "GB"))
   Int n_cores = select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
   
-  ###
-  # Medaka models
-  # Available: r103_min_high_g345, r103_min_high_g360, r103_prom_high_g360, r103_prom_snp_g3210, r103_prom_variant_g3210,
-  #            r10_min_high_g303, r10_min_high_g340,
-  #            r941_min_fast_g303, r941_min_high_g303, r941_min_high_g330, r941_min_high_g340_rle, r941_min_high_g344,
-  #            r941_min_high_g351, r941_min_high_g360
-  #            r941_prom_fast_g303, r941_prom_high_g303, r941_prom_high_g330, r941_prom_high_g344, r941_prom_high_g360,
-  #            r941_prom_snp_g303, r941_prom_snp_g322, r941_prom_snp_g360,
-  #            r941_prom_variant_g303, r941_prom_variant_g322, r941_prom_variant_g360
-  ###
   command <<<
     source /medaka/venv/bin/activate
     
