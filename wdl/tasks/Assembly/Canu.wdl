@@ -75,15 +75,17 @@ task Correct {
     Int disk_size = 150 * ceil(size(reads, "GB"))
 
     command <<<
-        set -euxo pipefail
-
-        canu -correct \
-             -p ~{prefix} -d canu_correct_output \
-             genomeSize=~{genome_size} \
-             corMaxEvidenceErate=0.15 \
-             correctedErrorRate=~{error_rate} \
-             -nanopore \
-             ~{reads}
+      set -euxo pipefail
+      
+      canu -correct \
+      -p ~{prefix} -d canu_correct_output \
+      genomeSize=~{genome_size} \
+      stopOnLowCoverage=false \
+      minInputCoverage=0.5 \
+      corMaxEvidenceErate=0.15 \
+      correctedErrorRate=~{error_rate} \
+      -nanopore \
+      ~{reads}
     >>>
 
     output {
@@ -133,14 +135,16 @@ task Trim {
     Int disk_size = 50 * ceil(size(corrected_reads, "GB"))
 
     command <<<
-       set -euxo pipefail
-
-       canu -trim \
-            -p ~{prefix} -d canu_trim_output \
-            genomeSize=~{genome_size} \
-            correctedErrorRate=~{error_rate} \
-            -nanopore-corrected \
-            ~{corrected_reads}
+      set -euxo pipefail
+      
+      canu -trim \
+      -p ~{prefix} -d canu_trim_output \
+      genomeSize=~{genome_size} \
+      stopOnLowCoverage=false \
+      minInputCoverage=1 \
+      correctedErrorRate=~{error_rate} \
+      -nanopore-corrected \
+      ~{corrected_reads}
     >>>
 
     output {
@@ -190,14 +194,16 @@ task Assemble {
     Int disk_size = 50 * ceil(size(trimmed_reads, "GB"))
 
     command <<<
-        set -euxo pipefail
-
-        canu -assemble \
-             -p ~{prefix} -d canu_assemble_output \
-             genomeSize=~{genome_size} \
-             correctedErrorRate=~{error_rate} \
-             -nanopore-corrected \
-             ~{trimmed_reads}
+      set -euxo pipefail
+      
+      canu -assemble \
+      -p ~{prefix} -d canu_assemble_output \
+      genomeSize=~{genome_size} \
+      stopOnLowCoverage=false \
+      minInputCoverage=1 \
+      correctedErrorRate=~{error_rate} \
+      -nanopore-corrected \
+      ~{trimmed_reads}
     >>>
 
     output {
