@@ -24,7 +24,20 @@ task MedakaPolish {
     RuntimeAttr? runtime_attr_override
   }
   
+
   Int disk_size = 4 * n_rounds * ceil(size([basecalled_reads, draft_assembly], "GB"))
+
+  RuntimeAttr default_attr = object {
+    cpu_cores:              8,
+    mem_gb:                 24,
+    disk_gb:                disk_size,
+    boot_disk_gb:           10,
+    preemptible_tries:      0,
+    max_retries:            0,
+    docker:                 "ontresearch/medaka:1.11.3"
+  }
+  RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
+
   Int n_cores = select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
   
   command <<<
@@ -47,17 +60,6 @@ task MedakaPolish {
     File polished_assembly = "~{prefix}.fasta"
   }
   
-  ###################
-  RuntimeAttr default_attr = object {
-    cpu_cores:              8,
-    mem_gb:                 24,
-    disk_gb:                disk_size,
-    boot_disk_gb:           10,
-    preemptible_tries:      0,
-    max_retries:            0,
-    docker:                 "ontresearch/medaka:1.11.3"
-  }
-  RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
   runtime {
     cpu:                    select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
     memory:                 select_first([runtime_attr.mem_gb, default_attr.mem_gb]) + " GiB"
