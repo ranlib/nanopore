@@ -1,5 +1,5 @@
 version 1.0
-
+import "../../tasks/Utilities/Utils.wdl" as Utils
 import "../../tasks/Assembly/Flye.wdl" as Flye
 import "../../tasks/Preprocessing/Medaka.wdl" as Medaka
 import "../../tasks/QC/Quast.wdl" as Quast
@@ -15,7 +15,6 @@ workflow ONT_assembly_with_flye {
     medaka_model: { description: "Medaka polishing model name"}
     participant_name: { description: "name of the participant from whom these samples were obtained"}
     prefix: { description: "prefix for output files"}
-    out_root_dir: { description: "directory to store the reads, variants, and metrics files"}
     n_rounds: { description: "number of medaka polishing rounds"}
   }
   
@@ -23,17 +22,17 @@ workflow ONT_assembly_with_flye {
     File fastq
     String medaka_model = "r941_min_high_g360"
     String prefix
-    File ref_map_file
+    File reference
     String participant_name
-    String out_root_dir = "pipeline"
-    Int genome_size = 3900000
     Int n_rounds = 1
   }
-  
+
+  call Utils.ComputeGenomeLength { input: fasta = reference }
+
   call Flye.Flye {
     input:
     reads = fastq,
-    genome_size = genome_size,
+    genome_size = ComputeGenomeLength.length,
     prefix = prefix,
   }
   
@@ -48,14 +47,14 @@ workflow ONT_assembly_with_flye {
   
   call Quast.Quast {
     input:
-    ref = ref_map_file,
+    ref = reference,
     assemblies = [ MedakaPolish.polished_assembly ]
   }
 
   call AV.CallAssemblyVariants {
     input:
     asm_fasta = MedakaPolish.polished_assembly,
-    ref_fasta = ref_map_file,
+    ref_fasta = reference,
     participant_name = participant_name,
     prefix = prefix + ".flye"
   }
