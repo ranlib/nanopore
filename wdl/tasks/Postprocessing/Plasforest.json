@@ -1,0 +1,13 @@
+{
+  "PlasForestWorkflow.reassign_contigs": false,
+  "PlasForestWorkflow.threads": 10,
+  "PlasForestWorkflow.database_file": "/home/dieterbest/Analysis/nanopore/config/plasmid_refseq.fasta",
+  "PlasForestWorkflow.output_file": "test.out",
+  "PlasForestWorkflow.input_file": "/home/dieterbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
+  "PlasForestWorkflow.model_file": "/home/dieterbest/Analysis/nanopore/config/plasforest.sav",
+  "PlasForestWorkflow.keep_features": false,
+  "PlasForestWorkflow.verbose_mode": true,
+  "PlasForestWorkflow.size_of_batch": 10,
+  "PlasForestWorkflow.show_best_hit": true
+}
+
