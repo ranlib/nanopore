@@ -1,6 +1,6 @@
 {
-  "ont_guppy_cpu.basecall_config": "dna_r9.4.1_450bps_hac.cfg",
-  "ont_guppy_cpu.fast5_file": "/home/dbest/Analysis/nanopore/data/FAL10948_ee16f061b4108ce0608af62a83c96d67e4fc2df9_1461_100.fast5",
-  "ont_guppy_cpu.disksize_gb": 100
+    "ont_guppy_cpu.basecall_config": "dna_r9.4.1_450bps_hac.cfg",
+    "ont_guppy_cpu.barcode_kit": "EXP-NBD104",
+    "ont_guppy_cpu.fast5_file": "/home/dbest/Analysis/nanopore/data/FAL10948_ee16f061b4108ce0608af62a83c96d67e4fc2df9_1461_100.fast5",
+    "ont_guppy_cpu.disksize_gb": 100
 }
-
