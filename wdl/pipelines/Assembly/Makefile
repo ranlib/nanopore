@@ -10,7 +10,10 @@ doc_ONT_assembly_with_flye:
 	rm ONT_assembly_with_flye.dot
 
 run_ONT_assembly_with_flye:
-	time miniwdl run --debug --dir test-ONT_assembly_with_flye --cfg ../../../miniwdl_production.cfg --input ONT_assembly_with_flye.json ONT_assembly_with_flye.wdl
+	miniwdl run --debug --dir test-ONT_assembly_with_flye --cfg ../../../miniwdl_production.cfg --input ONT_assembly_with_flye.json ONT_assembly_with_flye.wdl
+
+run_ONT_assembly_with_flye_dieter:
+	miniwdl run --debug --dir test-ONT_assembly_with_flye --cfg ../../../miniwdl_production.cfg --input ONT_assembly_with_flye_dieter.json ONT_assembly_with_flye.wdl
 
 ONT_assembly_with_canu:
 	java -jar ~/Software/womtool-86.jar validate --inputs ONT_assembly_with_canu.json ONT_assembly_with_canu.wdl
