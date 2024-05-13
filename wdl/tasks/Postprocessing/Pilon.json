@@ -1,0 +1,19 @@
+{
+  "PilonWorkflow.sort": true,
+  "PilonWorkflow.minqual": 0,
+  "PilonWorkflow.frags_bam": "/home/dieterbest/Analysis/nanopore/data/sample.bam",
+  "PilonWorkflow.genome_fasta": "/home/dieterbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
+  "PilonWorkflow.nostrays": true,
+  "PilonWorkflow.mindepth": 1,
+  "PilonWorkflow.iupac": true,
+  "PilonWorkflow.minmq": 0,
+  "PilonWorkflow.K": 47,
+  "PilonWorkflow.flank": 10,
+  "PilonWorkflow.defaultqual": 10,
+  "PilonWorkflow.nonpf": false,
+  "PilonWorkflow.verbose": true,
+  "PilonWorkflow.mingap": 10,
+  "PilonWorkflow.debug": true,
+  "PilonWorkflow.gapmargin": 100000
+}
+
