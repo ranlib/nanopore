@@ -23,34 +23,19 @@ task Pilon {
     Int minqual
     Boolean nostrays
   }
+  
   command <<<
-    your_tool_name \
-      --genome ${genome_fasta} \
-      ${" --frags " + frags_bam if defined(frags_bam)} \
-      ${" --jumps " + jumps_bam if defined(jumps_bam)} \
-      ${" --unpaired " + unpaired_bam if defined(unpaired_bam)} \
-      ${" --sort" if sort} \
-      ${" --iupac" if iupac} \
-      ${" --nonpf" if nonpf} \
-      ${" --targets " + join(",", targets) if defined(targets)} \
-      ${" --verbose" if verbose} \
-      ${" --debug" if debug} \
-      ${" --version" if defined(version)} \
-      ${" --defaultqual " + defaultqual if defined(defaultqual)} \
-      ${" --flank " + flank if defined(flank)} \
-      ${" --gapmargin " + gapmargin if defined(gapmargin)} \
-      ${" --K " + K if defined(K)} \
-      ${" --mindepth " + mindepth if defined(mindepth)} \
-      ${" --mingap " + mingap if defined(mingap)} \
-      ${" --minmq " + minmq if defined(minmq)} \
-      ${" --minqual " + minqual if defined(minqual)} \
-      ${" --nostrays" if nostrays}
+    pilon \
+      --genome ~{genome_fasta} \
+      ~{if defined(frags_bam) then " --frags " + frags_bam else ""}
+
   >>>
+
   output {
-    // Define your output files here if applicable
   }
+
   runtime {
-    docker: "dbest/pilon:v1.0"
+    docker: "dbest/pilon:v1.24"
   }
 }
 
@@ -77,6 +62,7 @@ workflow PilonWorkflow {
     Int minqual
     Boolean nostrays
   }
+  
   call Pilon {
     input:
       genome_fasta = genome_fasta,
@@ -100,7 +86,7 @@ workflow PilonWorkflow {
       minqual = minqual,
       nostrays = nostrays
   }
+
   output {
-    // Define your workflow outputs here if applicable
   }
 }
