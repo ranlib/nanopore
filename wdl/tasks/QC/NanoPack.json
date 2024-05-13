@@ -1,0 +1,17 @@
+{
+    "NanoPack.logLengths": false,
+    "NanoPack.dockerImageNanoPlot": "dbest/nanoplot:v1.42.0",
+    "NanoPack.outputTsvStats": true,
+    "NanoPack.outputPrefix": "out_",
+    "NanoPack.threads": 2,
+    "NanoPack.memory": "2GiB",
+    "NanoPack.format": "png",
+    "NanoPack.timeMinutes": 15,
+    "NanoPack.dockerImageNanoQC": "dbest/nanoqc:v0.9.4",
+    "NanoPack.directRna": false,
+    "NanoPack.showN50": true,
+    "NanoPack.outputDir": "out/",
+    "NanoPack.dropOutliers": false,
+    "NanoPack.inputFileType": "fastq",
+    "NanoPack.inputFile": "/home/dbest/Analysis/nanopore/data/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz"
+}
