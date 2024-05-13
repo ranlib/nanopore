@@ -12,4 +12,11 @@ Plasflow:
 run_Plasflow:
 	miniwdl run --debug --dir test-Plasflow --cfg ../../../miniwdl_production.cfg --input Plasflow.json Plasflow.wdl
 
+Pilon:
+	java -jar ~/Software/womtool-86.jar validate --inputs Pilon.json Pilon.wdl
+	miniwdl check Pilon.wdl
+
+run_Pilon:
+	miniwdl run --debug --dir test-Pilon --cfg ../../../miniwdl_production.cfg --input Pilon.json Pilon.wdl
+
 
