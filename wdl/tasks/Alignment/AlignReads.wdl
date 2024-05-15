@@ -18,7 +18,7 @@ task Minimap2 {
         RuntimeAttr? runtime_attr_override
     }
     meta {
-        descrpiton: "A wrapper to minimap2 for mapping & aligning (groups of) sequences to a reference"
+        description: "A wrapper to minimap2 for mapping & aligning (groups of) sequences to a reference"
     }
     parameter_meta {
         reads:            "query sequences to be mapped and aligned"
