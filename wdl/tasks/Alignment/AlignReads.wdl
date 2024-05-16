@@ -47,9 +47,9 @@ task Minimap2 {
 
         rg_len=$(echo -n '~{RG}' | wc -c | awk '{print $NF}')
         if [[ $rg_len -ne 0 ]] ; then
-            MAP_PARAMS="-ayYL --MD --eqx -x ~{map_preset} -R ~{RG} -t ${NUM_CPUS} ~{ref_fasta}"
+            MAP_PARAMS="-aYL --MD --eqx -x ~{map_preset} -R ~{RG} -t ${NUM_CPUS} ~{ref_fasta}"
         else
-            MAP_PARAMS="-ayYL --MD --eqx -x ~{map_preset} -t ${NUM_CPUS} ~{ref_fasta}"
+            MAP_PARAMS="-aYL --MD --eqx -x ~{map_preset} -t ${NUM_CPUS} ~{ref_fasta}"
         fi
 
         SORT_PARAMS="-@${NUM_CPUS} -m${MEM_FOR_SORT}G --no-PG -o ~{prefix}.pre.bam"
@@ -130,7 +130,7 @@ task Minimap2 {
         boot_disk_gb:       10,
         preemptible_tries:  3,
         max_retries:        2,
-        docker:             "us.gcr.io/broad-dsp-lrma/lr-align:0.1.28"
+        docker:             "dbest/minimap2:v2.28"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
