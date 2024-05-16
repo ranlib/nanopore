@@ -113,6 +113,6 @@ task SummarizeQuastReport {
 
     runtime {
         disks: "local-disk 100 HDD"
-        docker: "ubuntu:22.04"
+        docker: "ubuntu:24.04"
     }
 }
