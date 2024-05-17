@@ -1,5 +1,5 @@
 {
   "PlasflowWorkflow.threshold": 0.7,
   "PlasflowWorkflow.output_file_name": "plasflow_output.tsv",
-  "PlasflowWorkflow.input_file": "/home/dieterbest/Analysis/nanopore/data/NZ_CP014204.2.fa"
+  "PlasflowWorkflow.input_file": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa"
 }
