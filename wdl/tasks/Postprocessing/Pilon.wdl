@@ -3,35 +3,45 @@ version 1.0
 task Pilon {
   input {
     File genome_fasta
-    File? frags_bam
-    File? jumps_bam
-    File? unpaired_bam
-    Boolean sort
-    Boolean iupac
-    Boolean nonpf
+    File frags_bam
+    File frags_bai
     Array[String]? targets
-    Boolean verbose
-    Boolean debug
-    Boolean? version
-    Int defaultqual
-    Int flank
-    Int gapmargin
-    Int K
-    Float mindepth
-    Int mingap
-    Int minmq
-    Int minqual
-    Boolean nostrays
+    String output_prefix = "out"
+    Boolean sort = true
+    Boolean iupac = true
+    Boolean nonpf = false
+    Boolean verbose = true
+    Boolean debug = true
+    Boolean nostrays = true
+    Int defaultqual = 10
+    Int flank = 10
+    Int gapmargin = 100000
+    Int K = 47
+    Int mingap = 10
+    Int minmq = 0
+    Int minqual = 0
+    Float mindepth = 1
   }
   
   command <<<
+    set -xe
+    
+    cp ~{frags_bam} ./in.bam
+    cp ~{frags_bai} ./in.bam.bai
+    
     pilon \
-      --genome ~{genome_fasta} \
-      ~{if defined(frags_bam) then " --frags " + frags_bam else ""}
-
+    --genome ~{genome_fasta} \
+    --changes \
+    --vcf \
+    --outdir ./results \
+    --output ~{output_prefix} \
+    --frags ./in.bam
   >>>
 
   output {
+    File polished_fasta = "./results/~{output_prefix}.fasta"
+    File changes = "./results/~{output_prefix}.changes"
+    File vcf = "./results/~{output_prefix}.vcf"
   }
 
   runtime {
@@ -42,51 +52,37 @@ task Pilon {
 workflow PilonWorkflow {
   input {
     File genome_fasta
-    File? frags_bam
-    File? jumps_bam
-    File? unpaired_bam
+    File frags_bam
+    File frags_bai
+    String output_prefix
+    Array[String]? targets
     Boolean sort
     Boolean iupac
     Boolean nonpf
-    Array[String]? targets
     Boolean verbose
     Boolean debug
-    Boolean? version
+    Boolean nostrays
     Int defaultqual
     Int flank
     Int gapmargin
     Int K
-    Float mindepth
     Int mingap
     Int minmq
     Int minqual
-    Boolean nostrays
+    Float mindepth
   }
-  
+
   call Pilon {
     input:
-      genome_fasta = genome_fasta,
-      frags_bam = frags_bam,
-      jumps_bam = jumps_bam,
-      unpaired_bam = unpaired_bam,
-      sort = sort,
-      iupac = iupac,
-      nonpf = nonpf,
-      targets = targets,
-      verbose = verbose,
-      debug = debug,
-      version = version,
-      defaultqual = defaultqual,
-      flank = flank,
-      gapmargin = gapmargin,
-      K = K,
-      mindepth = mindepth,
-      mingap = mingap,
-      minmq = minmq,
-      minqual = minqual,
-      nostrays = nostrays
+    genome_fasta = genome_fasta,
+    output_prefix = output_prefix,
+    frags_bam = frags_bam,
+    frags_bai = frags_bai
   }
 
   output {
+    File polished_fasta = Pilon.polished_fasta
+    File vcf = Pilon.vcf
+    File changes = Pilon.changes
   }
 }
