@@ -1,0 +1,21 @@
+{
+    "wf_minimap2.Indexing.dockerImage": "staphb/minimap2:2.25",
+    "wf_minimap2.Indexing.kmerSize": 15,
+    "wf_minimap2.Indexing.memory": "4G",
+    "wf_minimap2.Indexing.minimizerWindowSize": 10,
+    "wf_minimap2.Indexing.timeMinutes": 10,
+    "wf_minimap2.Indexing.useHomopolymerCompressedKmer": false,
+    "wf_minimap2.Mapping.dockerImage": "staphb/minimap2:2.25",
+    "wf_minimap2.Mapping.kmerSize": 15,
+    "wf_minimap2.Mapping.memory": "30G",
+    "wf_minimap2.Mapping.secondaryAlignment": false,
+    "wf_minimap2.Mapping.skipSelfAndDualMappings": false,
+    "wf_minimap2.Mapping.softClippingForSupplementaryAlignments": true,
+    "wf_minimap2.Mapping.writeLongCigar": true,
+    "wf_minimap2.outputPrefix": "ERR552797",
+    "wf_minimap2.read1": "/home/dieterbest/Analysis/varpipe4/data/ERR552797_30percent_1.fq.gz",
+    "wf_minimap2.read2": "/home/dieterbest/Analysis/varpipe4/data/ERR552797_30percent_2.fq.gz",
+    "wf_minimap2.reference": "/home/dieterbest/Analysis/varpipe4/references/NC_000962.3/NC_000962.3.fasta",
+    "wf_minimap2.samplename": "ERR552797",
+    "wf_minimap2.threads": 1
+}
