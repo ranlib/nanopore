@@ -7,7 +7,7 @@ task run_raven {
         Int window_len = 5
         Float frequency = 0.001
         Float identity = 0.0
-        Long kMaxNumOverlaps = 32
+        Int kMaxNumOverlaps = 32
         Boolean use_micromizers = false
         Int polishing_rounds = 2
         Int match = 3
@@ -22,6 +22,8 @@ task run_raven {
     }
 
     command {
+      set -ex
+      
         raven \
         --kmer-len ~{kmer_len} \
         --window-len ~{window_len} \
@@ -39,7 +41,7 @@ task run_raven {
         ~{if resume then "--resume" else ""} \
         ~{if disable_checkpoints then "--disable-checkpoints" else ""} \
         --threads ~{threads} \
-        ~{sequences}
+        ~{sequences} > output.fasta
     }
 
     output {
@@ -62,7 +64,7 @@ workflow raven_workflow {
         Int window_len = 5
         Float frequency = 0.001
         Float identity = 0.0
-        Long kMaxNumOverlaps = 32
+        Int kMaxNumOverlaps = 32
         Boolean use_micromizers = false
         Int polishing_rounds = 2
         Int match = 3
