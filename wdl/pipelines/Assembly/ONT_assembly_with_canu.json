@@ -1,11 +1,17 @@
 {
-    "ONT_assembly_with_canu.fastq": "/home/dbest/Analysis/nanopore/data/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz",
-    "ONT_assembly_with_canu.trim_error_rate": 0.15,
-    "ONT_assembly_with_canu.MedakaPolish.runtime_attr_override": { "cpu_cores": 2},
-    "ONT_assembly_with_canu.correct_error_rate": 0.15,
-    "ONT_assembly_with_canu.prefix": "asm",
-    "ONT_assembly_with_canu.assemble_error_rate": 0.15,
-    "ONT_assembly_with_canu.participant_name": "Dieter",
-    "ONT_assembly_with_canu.reference": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
-    "ONT_assembly_with_canu.medaka_model": "r941_min_high_g360"
+  "ONT_assembly_with_canu.MedakaPolish.runtime_attr_override": {
+    "cpu_cores": 2
+  },
+  "ONT_assembly_with_canu.assemble_error_rate": 0.15,
+  "ONT_assembly_with_canu.correct_error_rate": 0.15,
+  "ONT_assembly_with_canu.fastqs": [
+    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz"
+  ],
+  "ONT_assembly_with_canu.medaka_model": "r941_min_high_g360",
+  "ONT_assembly_with_canu.participant_name": "Dieter",
+  "ONT_assembly_with_canu.prefix": "asm",
+  "ONT_assembly_with_canu.reference": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
+  "ONT_assembly_with_canu.trim_error_rate": 0.15
 }

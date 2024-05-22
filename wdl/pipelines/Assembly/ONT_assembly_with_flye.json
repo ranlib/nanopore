@@ -3,7 +3,7 @@
     "ONT_assembly_with_flye.reference": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
     "ONT_assembly_with_flye.participant_name": "Dieter",
     "ONT_assembly_with_flye.Quast.runtime_attr_override": {"cpu_cores": 2},
-    "ONT_assembly_with_flye.fastq": "/home/dbest/Analysis/nanopore/data/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz",
+    "ONT_assembly_with_flye.fastqs": ["/home/dbest/Analysis/nanopore/data/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz"],
     "ONT_assembly_with_flye.Quast.is_large": false,
     "ONT_assembly_with_flye.MedakaPolish.runtime_attr_override": {"cpu_cores": 2},
     "ONT_assembly_with_flye.prefix": "test",

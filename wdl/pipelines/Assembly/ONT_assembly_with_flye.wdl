@@ -6,12 +6,14 @@ import "../../tasks/QC/Quast.wdl" as Quast
 import "../../tasks/VariantCalling/CallAssemblyVariants.wdl" as AV
 
 workflow ONT_assembly_with_flye {
+
   meta {
     description: "Perform single sample genome assembly on ONT reads and variant calling."
   }
+  
   parameter_meta {
-    fastq: { description: "input fastq file" }
-    ref_map_file: { description: "reference sequence"}
+    fastqs: { description: "input fastq files for a sample" }
+    reference: { description: "reference sequence"}
     medaka_model: { description: "Medaka polishing model name"}
     participant_name: { description: "name of the participant from whom these samples were obtained"}
     prefix: { description: "prefix for output files"}
@@ -19,26 +21,28 @@ workflow ONT_assembly_with_flye {
   }
   
   input {
-    File fastq
-    String medaka_model = "r941_min_high_g360"
-    String prefix
+    Array[File]+ fastqs
     File reference
+    String medaka_model = "r941_min_high_g360"
     String participant_name
+    String prefix
     Int n_rounds = 1
   }
 
   call Utils.ComputeGenomeLength { input: fasta = reference }
 
+  call Utils.MergeFastqs { input: fastqs = fastqs }
+  
   call Flye.Flye {
     input:
-    reads = fastq,
+    reads = MergeFastqs.merged_fastq,
     genome_size = ComputeGenomeLength.length,
     prefix = prefix,
   }
   
   call Medaka.MedakaPolish {
     input:
-    basecalled_reads = fastq,
+    basecalled_reads = MergeFastqs.merged_fastq,
     draft_assembly = Flye.fa,
     model = medaka_model,
     prefix = basename(Flye.fa, ".fasta") + ".consensus",
