@@ -1,7 +1,7 @@
 version 1.0
 
 import "./task_minimap2.wdl" as minimap2
-import "./task_sortSam.wdl" as sort_sam
+import "../Utilities/task_sortSam.wdl" as sort_sam
 
 workflow wf_minimap2 {
   input {
