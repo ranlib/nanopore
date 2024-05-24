@@ -1,0 +1,14 @@
+{
+    "run_pypolca.prefix": "pypolca",
+    "run_pypolca.careful": true,
+    "run_pypolca.memory_limit": "2G",
+    "run_pypolca.min_alt": 2,
+    "run_pypolca.assembly": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta",
+    "run_pypolca.output_dir": "output_pypolca",
+    "run_pypolca.min_ratio": 2.0,
+    "run_pypolca.threads": 32,
+    "run_pypolca.no_polish": false,
+    "run_pypolca.reads1": "/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_Illumina_1.fastq.gz",
+    "run_pypolca.reads2": "/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_Illumina_2.fastq.gz",
+    "run_pypolca.force": true
+}
