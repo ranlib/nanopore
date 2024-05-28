@@ -40,4 +40,14 @@ Polca:
 run_Polca:
 	miniwdl run --debug --dir test-Polca --cfg ../../../miniwdl_production.cfg --input Polca.json Polca.wdl
 
+#
+# CirclatorAll
+#
+CirclatorAll:
+	java -jar ~/Software/womtool-86.jar validate --inputs CirclatorAll.json CirclatorAll.wdl
+	miniwdl check CirclatorAll.wdl
+
+run_CirclatorAll:
+	miniwdl run --debug --dir test-CirclatorAll --cfg ../../../miniwdl_production.cfg --input CirclatorAll.json CirclatorAll.wdl
+
 

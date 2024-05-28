@@ -1,6 +1,6 @@
 version 1.0
 
-workflow run_circlator {
+workflow wf_circlator {
     # Define input parameters
     input {
         File assembly_fasta
@@ -31,7 +31,7 @@ workflow run_circlator {
         Int merge_reassemble_end = 1000
         Boolean no_pair_merge = false
         Int clean_min_contig_length = 2000
-        Float clean_min_contig_percent = 95.0
+        Int clean_min_contig_percent = 95
         Int clean_diagdiff = 25
         Float clean_min_nucmer_id = 95.0
         Int clean_min_nucmer_length = 500
@@ -42,7 +42,7 @@ workflow run_circlator {
     }
 
     # Call the task
-    call circlator_task {
+    call task_circlator {
         input:
             assembly_fasta=assembly_fasta,
             reads_fastq=reads_fastq,
@@ -84,11 +84,11 @@ workflow run_circlator {
 
     # Output files from the task
     output {
-        Array[File] output_files = circlator_task.output_files
+        Array[File] output_files = task_circlator.output_files
     }
 }
 
-task circlator_task {
+task task_circlator {
     # Define input parameters for the task
     input {
         File assembly_fasta
@@ -119,7 +119,7 @@ task circlator_task {
         Int merge_reassemble_end
         Boolean no_pair_merge
         Int clean_min_contig_length
-        Float clean_min_contig_percent
+        Int clean_min_contig_percent
         Int clean_diagdiff
         Float clean_min_nucmer_id
         Int clean_min_nucmer_length
