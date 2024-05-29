@@ -17,6 +17,7 @@ workflow ONT_assembly_with_raven {
     medaka_model: { description: "Medaka polishing model name"}
     participant_name: { description: "name of the participant from whom these samples were obtained"}
     prefix: { description: "prefix for output files"}
+    graphical_fragment_assembly: { description: "graph file of raven assembly"}
     n_rounds: { description: "number of medaka polishing rounds"}
   }
   
@@ -26,6 +27,7 @@ workflow ONT_assembly_with_raven {
     String medaka_model = "r941_min_high_g360"
     String participant_name
     String prefix
+    String graphical_fragment_assembly
     Int n_rounds = 1
   }
 
@@ -35,7 +37,8 @@ workflow ONT_assembly_with_raven {
   
   call Raven.Raven {
     input:
-    sequences = MergeFastqs.merged_fastq
+    sequences = MergeFastqs.merged_fastq,
+    graphical_fragment_assembly = graphical_fragment_assembly
   }
   
   call Medaka.MedakaPolish {
