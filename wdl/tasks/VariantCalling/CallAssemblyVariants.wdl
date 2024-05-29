@@ -121,7 +121,7 @@ task Paftools {
         boot_disk_gb:       10,
         preemptible_tries:  3,
         max_retries:        2,
-        docker:             "dbest/asm:v0.1.13"
+        docker:             "dbest/asm:v0.1.14"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
