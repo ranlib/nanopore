@@ -8,7 +8,6 @@
     "raven_workflow.resume": false,
     "raven_workflow.identity": 0.0,
     "raven_workflow.disable_checkpoints": false,
-    "raven_workflow.threads": 1,
     "raven_workflow.mismatch": -5,
     "raven_workflow.use_micromizers": false,
     "raven_workflow.kMaxNumOverlaps": 32,

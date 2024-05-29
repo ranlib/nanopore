@@ -20,7 +20,7 @@ task Raven {
     String? unitig_graphical_fragment_assembly
     Boolean resume = false
     Boolean disable_checkpoints = false
-    Int threads = 1
+
     RuntimeAttr? runtime_attr_override
   }
   
@@ -97,7 +97,6 @@ workflow raven_workflow {
         String? unitig_graphical_fragment_assembly
         Boolean resume = false
         Boolean disable_checkpoints = false
-        Int threads = 1
     }
 
     call Raven {
@@ -117,8 +116,7 @@ workflow raven_workflow {
             graphical_fragment_assembly = graphical_fragment_assembly,
             unitig_graphical_fragment_assembly = unitig_graphical_fragment_assembly,
             resume = resume,
-            disable_checkpoints = disable_checkpoints,
-            threads = threads
+            disable_checkpoints = disable_checkpoints
     }
 
     output {
