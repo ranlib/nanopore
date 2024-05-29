@@ -161,3 +161,4 @@ cython_debug/
 
 # emacs backup files
 *~
+test-*
