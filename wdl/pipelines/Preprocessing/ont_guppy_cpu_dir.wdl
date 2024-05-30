@@ -37,7 +37,8 @@ task guppy_basecall_cpu {
   }
 
 
-  Int disk_size_gb = 3 * ceil(size(fast5_files, "GB"))
+  #Int disk_size_gb = 3 * ceil(size(fast5_files, "GB"))
+  Int disk_size_gb = 100
   String barcode_arg = if defined(barcode_kit) then "--barcode_kits \"~{barcode_kit}\" --enable_trim_barcodes" else ""
   
   command <<<
