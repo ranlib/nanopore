@@ -88,8 +88,8 @@ task guppy_basecall_cpu {
   }
 
   RuntimeAttr default_attr = object {
-    cpu_cores:          4,
-    mem_gb:             8,
+    cpu_cores:          16,
+    mem_gb:             64,
     disk_gb:            disk_size_gb,
     boot_disk_gb:       30,
     preemptible_tries:  1,
