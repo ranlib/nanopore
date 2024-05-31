@@ -1,0 +1,11 @@
+{
+    "ont_guppy_cpu.barcode_kit": "EXP-NBD104",
+    "ont_guppy_cpu.basecall_config": "dna_r9.4.1_450bps_hac.cfg",
+    "ont_guppy_cpu.fast5_files": [
+	"gs://fc-801d6682-e97f-4491-aa10-278a1acd7a19/MK1C_Ligation_Sequencing_Kit/201109_C_Barat_1/fast5_pass/barcode01_11R-0083/FAO22939_pass_barcode01_fa56e421_0.fast5",
+	"gs://fc-801d6682-e97f-4491-aa10-278a1acd7a19/MK1C_Ligation_Sequencing_Kit/201109_C_Barat_1/fast5_pass/barcode01_11R-0083/FAO22939_pass_barcode01_fa56e421_1.fast5",
+	"gs://fc-801d6682-e97f-4491-aa10-278a1acd7a19/MK1C_Ligation_Sequencing_Kit/201109_C_Barat_1/fast5_pass/barcode01_11R-0083/FAO22939_pass_barcode01_fa56e421_2.fast5",
+	"gs://fc-801d6682-e97f-4491-aa10-278a1acd7a19/MK1C_Ligation_Sequencing_Kit/201109_C_Barat_1/fast5_pass/barcode01_11R-0083/FAO22939_pass_barcode01_fa56e421_3.fast5",
+	"gs://fc-801d6682-e97f-4491-aa10-278a1acd7a19/MK1C_Ligation_Sequencing_Kit/201109_C_Barat_1/fast5_pass/barcode01_11R-0083/FAO22939_pass_barcode01_fa56e421_4.fast5"
+    ]
+}
