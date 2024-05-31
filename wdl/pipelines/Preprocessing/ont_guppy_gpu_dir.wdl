@@ -2,14 +2,14 @@ version 1.0
 
 import "../../structs/Structs.wdl"
 
-workflow ont_guppy_cpu {
+workflow ont_guppy_gpu {
   input {
     String basecall_config
     String? barcode_kit
     Array[File]+ fast5_files
   }
 
-  call guppy_basecall_cpu {
+  call guppy_basecall_gpu {
     input:
     fast5_files = fast5_files,
     basecall_config = basecall_config,
@@ -17,17 +17,17 @@ workflow ont_guppy_cpu {
   }
   
   output {
-    Array[File] pass_fastqs = guppy_basecall_cpu.pass_fastqs
-    File sequencing_summary = guppy_basecall_cpu.sequencing_summary
-    Array[String] barcodes = guppy_basecall_cpu.barcodes
-    Map[String, String] metadata = guppy_basecall_cpu.metadata
-    Int num_pass_fastqs = guppy_basecall_cpu.num_pass_fastqs
-    Int num_fail_fastqs = guppy_basecall_cpu.num_fail_fastqs
+    Array[File] pass_fastqs = guppy_basecall_gpu.pass_fastqs
+    File sequencing_summary = guppy_basecall_gpu.sequencing_summary
+    Array[String] barcodes = guppy_basecall_gpu.barcodes
+    Map[String, String] metadata = guppy_basecall_gpu.metadata
+    Int num_pass_fastqs = guppy_basecall_gpu.num_pass_fastqs
+    Int num_fail_fastqs = guppy_basecall_gpu.num_fail_fastqs
   }
 }
 
 
-task guppy_basecall_cpu {
+task guppy_basecall_gpu {
   input {
     String basecall_config
     String? barcode_kit
