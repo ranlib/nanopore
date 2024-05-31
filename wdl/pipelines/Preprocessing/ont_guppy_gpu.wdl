@@ -37,8 +37,7 @@ task guppy_basecall_gpu {
   }
 
 
-  #Int disk_size_gb = 3 * ceil(size(fast5_files, "GB"))
-  Int disk_size_gb = 100
+  Int disk_size_gb = 3 * ceil(size(fast5_files, "GB"))
   String barcode_arg = if defined(barcode_kit) then "--barcode_kits \"~{barcode_kit}\" --enable_trim_barcodes" else ""
   
   command <<<
@@ -47,7 +46,7 @@ task guppy_basecall_gpu {
     for FILE in ~{sep=" " fast5_files} ; do
        cp ${FILE} ./fast5_dir
     done
-    guppy_basecaller -i ./fast5_dir/ -s guppy_output -c ~{basecall_config} ~{barcode_arg} --compress_fastq
+    guppy_basecaller -i ./fast5_dir/ -s guppy_output -c ~{basecall_config} ~{barcode_arg} -x "cuda:all" --num_callers 14 --gpu_runners_per_device 8 --compress_fastq
 
     # Make a list of the barcodes that were seen in the data
     find guppy_output/ -name '*fastq*' -not -path '*fail*' -type f | \
