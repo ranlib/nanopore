@@ -50,4 +50,7 @@ CirclatorAll:
 run_CirclatorAll:
 	miniwdl run --debug --dir test-CirclatorAll --cfg ../../../miniwdl_production.cfg --input CirclatorAll.json CirclatorAll.wdl
 
+run_CirclatorAll_flye:
+	miniwdl run --debug --dir test-CirclatorAll_flye --cfg ../../../miniwdl_production.cfg --input CirclatorAll_flye.json CirclatorAll.wdl
+
 
