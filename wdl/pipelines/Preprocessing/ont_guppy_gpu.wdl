@@ -74,7 +74,8 @@ task guppy_basecall_gpu {
     xargs -n1 zgrep -m1 '^@' | \
     sed 's/ /\n/g' | \
     grep -v '^@' | \
-    sed 's/=/\t/g' | tee metadata.txt
+    sed 's/=/\t/g' | \
+    awk 'BEGIN{OFS="\t"}{ if ($1 == "sampleid" && $2 == "") {$2 = "unknown"} ; print $0 }' | tee metadata.txt
   >>>
   
   output {
