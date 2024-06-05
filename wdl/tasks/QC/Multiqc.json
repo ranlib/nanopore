@@ -1,0 +1,26 @@
+{
+    "wf_multiqc.inputFiles": [
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/reverseData/fastqc_data.txt",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/forwardData/fastqc_data.txt",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/trim_log/trimLog.txt",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/adapter_stats/ERR552797.adapters.stats.txt",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/phiX_stats/ERR552797.phix.stats.txt",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/mark_duplicates_metrics/MarkDupes.metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/00/multiple_metrics.insert_size_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/01/multiple_metrics.alignment_summary_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/03/multiple_metrics.base_distribution_by_cycle_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/05/multiple_metrics.insert_size_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/07/multiple_metrics.quality_by_cycle_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/09/multiple_metrics.quality_distribution_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/11/multiple_metrics.gc_bias.detail_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/12/multiple_metrics.gc_bias.summary_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/14/multiple_metrics.pre_adapter_detail_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/15/multiple_metrics.pre_adapter_summary_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/16/multiple_metrics.bait_bias_detail_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/17/multiple_metrics.bait_bias_summary_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/18/multiple_metrics.error_summary_metrics",
+        "/home/dieterbest/Analysis/varpipe4/scripts/20230617_233330_wf_varpipe/out/collectMetricsOutput/19/multiple_metrics.quality_yield_metrics"
+    ],
+    "wf_multiqc.outputPrefix": "ERR552797"
+}
+
