@@ -75,7 +75,8 @@ task guppy_basecall_cpu {
     xargs -n1 zgrep -m1 '^@' | \
     sed 's/ /\n/g' | \
     grep -v '^@' | \
-    sed 's/=/\t/g' | tee metadata.txt
+    sed 's/=/\t/g' | \
+    awk 'BEGIN{OFS="\t"}{ if ($1 == "sampleid" && $2 == "") {$2 = "unknown"} ; print $0 }' | tee metadata.txt
   >>>
   
   output {
@@ -91,7 +92,6 @@ task guppy_basecall_cpu {
     cpu_cores:          16,
     mem_gb:             64,
     disk_gb:            disk_size_gb,
-    boot_disk_gb:       30,
     preemptible_tries:  1,
     max_retries:        1,
     docker:             "genomicpariscentre/guppy:latest"
@@ -101,14 +101,8 @@ task guppy_basecall_cpu {
     cpu:                    select_first([runtime_attr.cpu_cores,         default_attr.cpu_cores])
     memory:                 select_first([runtime_attr.mem_gb,            default_attr.mem_gb]) + " GiB"
     disks: "local-disk " +  select_first([runtime_attr.disk_gb,           default_attr.disk_gb]) + " HDD"
-    bootDiskSizeGb:         select_first([runtime_attr.boot_disk_gb,      default_attr.boot_disk_gb])
     preemptible:            select_first([runtime_attr.preemptible_tries, default_attr.preemptible_tries])
     maxRetries:             select_first([runtime_attr.max_retries,       default_attr.max_retries])
     docker:                 select_first([runtime_attr.docker,            default_attr.docker])
-    gpuType:                "nvidia-tesla-p100"
-    gpuCount:               1
-    nvidiaDriverVersion:    "418.152.00"
-    zones:                  ["us-central1-c", "us-central1-f", "us-east1-b", "us-east1-c", "us-west1-a", "us-west1-b"]
-    cpuPlatform:            "Intel Haswell"
   }
 }
