@@ -1,5 +1,7 @@
 version 1.0
 
+import "../../structs/Structs.wdl"
+
 workflow wf_chopper {
   input {
     File input_file
@@ -45,8 +47,10 @@ task chopper {
     Int threads
     String? contam_file
     Boolean inverse
+    RuntimeAttr? runtime_attr_override
   }
 
+  Int disk_size = 3*ceil(size(input_file, "GB"))
   String output_filename = sub(sub(basename(input_file),".fastq.gz$",""),".fq.gz$","") + "_chopper.fastq.gz"
 
   command {
@@ -69,9 +73,23 @@ task chopper {
     File output_file = output_filename
   }
 
+  RuntimeAttr default_attr = object {
+    cpu_cores:          2,
+    mem_gb:             4,
+    disk_gb:            disk_size,
+    boot_disk_gb:       10,
+    preemptible_tries:  2,
+    max_retries:        1,
+    docker:             "dbest/chopper:v0.8.0"
+  }
+  RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
   runtime {
-    docker: "dbest/chopper:v0.8.0"
-    memory: "4G"
-    cpu: threads
+    cpu:                    select_first([runtime_attr.cpu_cores,         default_attr.cpu_cores])
+    memory:                 select_first([runtime_attr.mem_gb,            default_attr.mem_gb]) + " GiB"
+    disks: "local-disk " +  select_first([runtime_attr.disk_gb,           default_attr.disk_gb]) + " HDD"
+    bootDiskSizeGb:         select_first([runtime_attr.boot_disk_gb,      default_attr.boot_disk_gb])
+    preemptible:            select_first([runtime_attr.preemptible_tries, default_attr.preemptible_tries])
+    maxRetries:             select_first([runtime_attr.max_retries,       default_attr.max_retries])
+    docker:                 select_first([runtime_attr.docker,            default_attr.docker])
   }
 }
