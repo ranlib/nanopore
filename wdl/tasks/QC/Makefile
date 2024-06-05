@@ -12,3 +12,20 @@ doc_NanoPack:
 run_NanoPack:
 	time miniwdl run --debug --dir test-NanoPack --cfg ../../../miniwdl_production.cfg --input NanoPack.json NanoPack.wdl
 
+#
+# Chopper
+#
+Chopper:
+	java -jar ~/Software/womtool-86.jar validate --inputs Chopper.json Chopper.wdl
+	miniwdl check Chopper.wdl
+
+doc_Chopper:
+	wdl-aid Chopper.wdl -o Chopper.md
+	java -jar ~/Software/womtool-86.jar graph Chopper.wdl > Chopper.dot
+	dot -Tpdf -o Chopper.pdf Chopper.dot
+	dot -Tjpeg -o Chopper.jpeg Chopper.dot
+	rm Chopper.dot
+
+run_Chopper:
+	time miniwdl run --debug --dir test-Chopper --cfg ../../../miniwdl_production.cfg --input Chopper.json Chopper.wdl
+
