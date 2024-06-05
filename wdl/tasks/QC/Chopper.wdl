@@ -1,6 +1,6 @@
 version 1.0
 
-workflow chopper_workflow {
+workflow wf_chopper {
   input {
     File input_file
     Int min_quality = 0
@@ -14,7 +14,7 @@ workflow chopper_workflow {
     Boolean inverse = false
   }
 
-  call chopper_task {
+  call chopper {
     input:
       input_file = input_file,
       min_quality = min_quality,
@@ -29,11 +29,11 @@ workflow chopper_workflow {
   }
 
   output {
-    File output_file = chopper_task.output_file
+    File output_file = chopper.output_file
   }
 }
 
-task chopper_task {
+task chopper {
   input {
     File input_file
     Int min_quality
@@ -47,7 +47,10 @@ task chopper_task {
     Boolean inverse
   }
 
+  String output_filename = sub(sub(basename(input_file),".fastq.gz$",""),".fq.gz$","") + "_chopper.fastq.gz"
+
   command {
+    set -xe
     chopper \
       -q ~{min_quality} \
       --maxqual ~{max_quality} \
@@ -59,11 +62,11 @@ task chopper_task {
       ~{if defined(contam_file) then "-c " + contam_file else ""} \
       ~{if inverse then "--inverse" else ""} \
       -i ~{input_file} \
-      -o output.txt
+      | gzip > ~{output_filename}
   }
 
   output {
-    File output_file = "output.txt"
+    File output_file = output_filename
   }
 
   runtime {

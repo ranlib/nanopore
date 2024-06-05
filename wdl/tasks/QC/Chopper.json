@@ -1,0 +1,12 @@
+{
+  "wf_chopper.input_file": "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
+  "wf_chopper.max_length": 2147483647,
+  "wf_chopper.min_length": 500,
+  "wf_chopper.min_quality": 0,
+  "wf_chopper.head_crop": 15,
+  "wf_chopper.max_quality": 1000,
+  "wf_chopper.threads": 4,
+  "wf_chopper.tail_crop": 15,
+  "wf_chopper.inverse": false
+}
+
