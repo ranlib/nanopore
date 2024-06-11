@@ -40,21 +40,6 @@ task NanoPlotFromSummary {
             tee map.txt
     >>>
 
-    #number_of_reads 88000
-    #number_of_bases 467855516.0
-    #median_read_length      4086.0
-    #mean_read_length        5316.5
-    #read_length_stdev       4413.2
-    #n50     6731.0
-    #active_channels 506
-    #mean_qual       12.8
-    #median_qual     13.7
-    #Reads_Q5        85483
-    #Reads_Q7        80249
-    #Reads_Q10       71810
-    #Reads_Q12       59097
-    #Reads_Q15       26597
-
     output {
         File stats = "NanoStats.txt"
         Map[String, Float] stats_map = read_map("map.txt")
@@ -76,7 +61,6 @@ task NanoPlotFromSummary {
         File Yield_By_Length = "Yield_By_Length.png"
     }
 
-    #########################
     RuntimeAttr default_attr = object {
         cpu_cores:          4,
         mem_gb:             32,
@@ -157,7 +141,6 @@ task NanoPlotFromRichFastqs {
         File Yield_By_Length = "Yield_By_Length.png"
     }
 
-    #########################
     RuntimeAttr default_attr = object {
         cpu_cores:          4,
         mem_gb:             32,
@@ -203,7 +186,7 @@ task NanoPlotFromBam {
     command <<<
         set -euxo pipefail
 
-        touch ~{bai} # avoid the warning bai is older than bam
+        #touch ~{bai} # avoid the warning bai is older than bam
 
         num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
 
@@ -222,24 +205,6 @@ task NanoPlotFromBam {
             awk '{ print $1 "\t" $2 }' | \
             tee map.txt
     >>>
-
-    #number_of_reads 143488
-    #number_of_bases 993469297.0
-    #number_of_bases_aligned 402067275.0
-    #fraction_bases_aligned  0.4
-    #median_read_length      5081.0
-    #mean_read_length        6923.7
-    #read_length_stdev       6116.7
-    #n50     9210.0
-    #average_identity        92.8
-    #median_identity 94.5
-    #mean_qual       14.6
-    #median_qual     15.0
-    #Reads_Q5        143488
-    #Reads_Q7        143488
-    #Reads_Q10       140551
-    #Reads_Q12       119386
-    #Reads_Q15       71164
 
     output {
         File stats = "NanoStats.txt"
@@ -266,7 +231,6 @@ task NanoPlotFromBam {
 #        File Yield_By_Length = "Yield_By_Length.png"
     }
 
-    #########################
     RuntimeAttr default_attr = object {
         cpu_cores:          8,
         mem_gb:             24,
