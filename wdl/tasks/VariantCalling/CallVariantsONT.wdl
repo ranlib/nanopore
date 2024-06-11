@@ -61,18 +61,14 @@ workflow CallVariantsONT {
       preset = "ONT"
     }
     
-    call VariantUtils.MergeAndSortVCFs as MergeAndSortClairVCFs {
+    call VariantUtils.ZipAndIndexVCF as ZipAndIndexClairVCF {
       input:
-      vcfs = [ Clair.vcf ],
-      ref_fasta_fai = ref_fasta_fai,
-      prefix = prefix + ".clair"
+      vcf = Clair.vcf
     }
-    
-    call VariantUtils.MergeAndSortVCFs as MergeAndSortClair_gVCFs {
+
+    call VariantUtils.ZipAndIndexVCF as ZipAndIndexClair_gVCF {
       input:
-      vcfs = [ Clair.gvcf ],
-      ref_fasta_fai = ref_fasta_fai,
-      prefix = prefix + ".clair.g"
+      vcf = Clair.gvcf
     }
   }
   
@@ -95,11 +91,11 @@ workflow CallVariantsONT {
   output {
     File? sniffles_vcf = ZipAndIndexSnifflesVCF.vcfgz
     File? sniffles_tbi = ZipAndIndexSnifflesVCF.tbi
-    
-    File? clair_vcf = MergeAndSortClairVCFs.vcf
-    File? clair_tbi = MergeAndSortClairVCFs.tbi
-    
-    File? clair_gvcf = MergeAndSortClair_gVCFs.vcf
-    File? clair_gtbi = MergeAndSortClair_gVCFs.tbi
+
+    File? clair_vcf = ZipAndIndexClairVCF.vcfgz
+    File? clair_tbi = ZipAndIndexClairVCF.tbi
+
+    File? clair_gvcf = ZipAndIndexClair_gVCF.vcfgz
+    File? clair_gtbi = ZipAndIndexClair_gVCF.tbi
   }
 }
