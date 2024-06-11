@@ -1,0 +1,21 @@
+{
+  "ont_variant_calling.CallVariantsONT.minsvlen": 50,
+  "ont_variant_calling.MergeAllReads.runtime_attr_override": {
+    "boot_disk_gb": 30,
+    "cpu_cores": 2,
+    "disk_gb": 100,
+    "docker": "dbest/samtools:v1.20",
+    "max_retries": 1,
+    "mem_gb": 100,
+    "preemptible_tries": 1
+  },
+  "ont_variant_calling.aligned_bais": ["/home/dbest/Analysis/nanopore/wdl/pipelines/Alignment/test-Alignment/20240607_172915_Alignment/out/aligned_bai/out.bam.bai"],
+  "ont_variant_calling.aligned_bams": ["/home/dbest/Analysis/nanopore/wdl/pipelines/Alignment/test-Alignment/20240607_172915_Alignment/out/aligned_bam/out.bam"],
+  "ont_variant_calling.call_small_variants": true,
+  "ont_variant_calling.call_svs": true,
+  "ont_variant_calling.fast_less_sensitive_sv": true,
+  "ont_variant_calling.reference": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta",
+  "ont_variant_calling.reference_dict": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta.dict",
+  "ont_variant_calling.reference_fai": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta.fai",
+  "ont_variant_calling.sample_name": "S_aureus_JKD6159"
+}
