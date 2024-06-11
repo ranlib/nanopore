@@ -5,20 +5,17 @@ import "../../tasks/Alignment/AlignReads.wdl" as Align
 workflow Alignment {
   
   meta {
-    description: "Perform alignment of reads to reference via minimap2."
+    description: "Perform alignment of single end reads to reference via minimap2."
   }
   
   parameter_meta {
-    fastq: { description: "input fastq file" }
-    ref_map_file: { description: "reference sequence"}
-    medaka_model: { description: "Medaka polishing model name"}
-    participant_name: { description: "name of the participant from whom these samples were obtained"}
+    reads: { description: "list of input single end fastq files" }
+    ref_fasta: { description: "reference sequence"}
     prefix: { description: "prefix for output files"}
-    n_rounds: { description: "number of medaka polishing rounds"}
   }
   
   input {
-    Array[File] reads
+    Array[File]+ reads
     File ref_fasta
     String RG
     String map_preset
