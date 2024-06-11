@@ -108,5 +108,14 @@ workflow ont_variant_calling {
     
     Float average_identity = coverage.average_identity
     Float median_identity = coverage.median_identity
+
+    File? sniffles_vcf = CallVariantsONT.sniffles_vcf
+    File? sniffles_tbi = CallVariantsONT.sniffles_tbi
+    
+    File? clair_vcf = CallVariantsONT.clair_vcf
+    File? clair_tbi = CallVariantsONT.clair_tbi
+    
+    File? clair_gvcf = CallVariantsONT.clair_gvcf
+    File? clair_gtbi = CallVariantsONT.clair_gtbi
   }
 }
