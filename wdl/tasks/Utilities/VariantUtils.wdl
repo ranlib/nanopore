@@ -108,9 +108,9 @@ task MergeAndSortVCFs {
         echo "==========================================================="
         echo "starting concatenation" && date
         echo "==========================================================="
+#            --naive \
         bcftools \
             concat \
-            --naive \
             --threads ~{cores-1} \
             -f all_raw_vcfs.txt \
             --output-type v \
@@ -203,7 +203,7 @@ task MergeAndSortVCFs {
 
 task CollectDefinitions {
     meta {
-        description: "Collect (union) various definitions in vcf files, adddressing a bcftols bug: https://github.com/samtools/bcftools/issues/1629"
+        description: "Collect (union) various definitions in vcf files, adddressing a bcftools bug: https://github.com/samtools/bcftools/issues/1629"
     }
     input {
         Array[File] vcfs
