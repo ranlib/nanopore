@@ -1,3 +1,5 @@
+docs_dir = $(subst wdl,docs,$(PWD))
+
 ont_variant_calling:
 	java -jar ~/Software/womtool-86.jar validate --inputs ont_variant_calling.json ont_variant_calling.wdl
 	miniwdl check ont_variant_calling.wdl
@@ -8,6 +10,9 @@ doc_ont_variant_calling:
 	dot -Tpdf -o ont_variant_calling.pdf ont_variant_calling.dot
 	dot -Tjpeg -o ont_variant_calling.jpeg ont_variant_calling.dot
 	rm ont_variant_calling.dot
+	echo $(docs_dir)
+	mkdir -p $(docs_dir)
+	mv *.md *.jpeg *.pdf $(docs_dir)
 
 run_ont_variant_calling:
 	time miniwdl run --debug --dir test-ont_variant_calling --cfg ../../../miniwdl_production.cfg --input ont_variant_calling.json ont_variant_calling.wdl
