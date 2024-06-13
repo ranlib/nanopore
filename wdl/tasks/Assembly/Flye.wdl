@@ -9,21 +9,22 @@ workflow Flye {
     }
 
     parameter_meta {
-        genome_size: "Estimated genome size in base pairs"
-        reads: "Input reads (in fasta or fastq format, compressed or uncompressed)"
-        prefix: "Prefix to apply to assembly output filenames"
+      reads: "Input reads (in fasta or fastq format, compressed or uncompressed)"
+      read_type: "read type for running flye"
+      prefix: "Prefix to apply to assembly output filenames"
     }
 
     input {
-        File reads
-        Float genome_size
-        String prefix
+      File reads
+      String prefix
+      String read_type = "nano-raw"
     }
 
     call Assemble {
-        input:
-            reads  = reads,
-            prefix = prefix
+      input:
+      reads  = reads,
+      read_type = read_type,
+      prefix = prefix
     }
 
     output {
@@ -36,6 +37,7 @@ task Assemble {
   input {
     File reads
     String prefix = "out"
+    String read_type = "nano-raw"
     RuntimeAttr? runtime_attr_override
   }
   
@@ -50,8 +52,19 @@ task Assemble {
     set -euxo pipefail
     
     num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
+
+    read_arg="--nano-raw"
+    if [[ ~{read_type} == "nano-raw" ]]; then
+    read_arg="--nano-raw"
+    elif [[ ~{read_type} == "nano-corr" ]]; then
+    read_arg="--nano-corr"
+    elif [[ ~{read_type} == "nano-hq" ]]; then
+    read_arg="--nano-hq"
+    else
+    read_arg="--nano-raw"
+    fi
     
-    flye --nano-raw ~{reads} --threads $num_core --out-dir asm
+    flye ${read_arg} ~{reads} --threads $num_core --out-dir asm
     
     mv asm/assembly.fasta ~{prefix}.flye.fa
     mv asm/assembly_graph.gfa ~{prefix}.flye.gfa
