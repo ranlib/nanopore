@@ -9,16 +9,16 @@ workflow CallAssemblyVariants {
     }
 
     parameter_meta {
-        asm_fasta:        "haploid assembly"
-        ref_fasta:        "reference to which assembly should be aligned"
-        participant_name: "participant name"
-        prefix:           "prefix for output files"
+      asm_fasta:        "haploid assembly"
+      ref_fasta:        "reference to which assembly should be aligned"
+      sample_name:      "sample name"
+      prefix:           "prefix for output files"
     }
 
     input {
         File asm_fasta
         File ref_fasta
-        String participant_name
+        String sample_name
         String prefix
     }
 
@@ -33,7 +33,7 @@ workflow CallAssemblyVariants {
         input:
             ref_fasta = ref_fasta,
             paf = AlignAsPAF.paf,
-            participant_name = participant_name,
+            sample_name = sample_name,
             prefix = prefix
     }
 
@@ -93,7 +93,7 @@ task Paftools {
     input {
         File ref_fasta
         File paf
-        String participant_name
+        String sample_name
         String prefix
 
         RuntimeAttr? runtime_attr_override
@@ -105,7 +105,7 @@ task Paftools {
     command <<<
         zcat ~{paf} | \
             sort -k6,6 -k8,8n | \
-            paftools.js call -f ~{ref_fasta} -s ~{participant_name} - \
+            paftools.js call -f ~{ref_fasta} -s ~{sample_name} - \
             > ~{prefix}.paftools.vcf
     >>>
 
