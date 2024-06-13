@@ -94,7 +94,7 @@ task guppy_basecall_gpu {
     boot_disk_gb:       30,
     preemptible_tries:  1,
     max_retries:        1,
-    docker:             "genomicpariscentre/guppy-gpu:latest"
+    docker:             "genomicpariscentre/guppy-gpu:6.5.7"
   }
   RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
   runtime {

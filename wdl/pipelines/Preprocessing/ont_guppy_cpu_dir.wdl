@@ -94,7 +94,7 @@ task guppy_basecall_cpu {
     disk_gb:            disk_size_gb,
     preemptible_tries:  1,
     max_retries:        1,
-    docker:             "genomicpariscentre/guppy:latest"
+    docker:             "genomicpariscentre/guppy:6.5.7"
   }
   RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
   runtime {
