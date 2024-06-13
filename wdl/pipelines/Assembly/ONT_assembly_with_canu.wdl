@@ -13,13 +13,13 @@ workflow ONT_assembly_with_canu {
   }
   
   parameter_meta {
-    fastqs:       "input fastq files for a sample"
-    reference:        "input genome reference"
+    fastqs:              "input fastq files for a sample"
+    reference:           "input genome reference"
     correct_error_rate:  "stringency for overlaps in Canu's correction step"
     trim_error_rate:     "stringency for overlaps in Canu's trim step"
     assemble_error_rate: "stringency for overlaps in Canu's assemble step"
     medaka_model:        "Medaka polishing model name"
-    participant_name:    "name of the participant from whom these samples were obtained"
+    sample_name:         "name of sample"
     prefix:              "prefix for output files"
   }
   
@@ -30,7 +30,7 @@ workflow ONT_assembly_with_canu {
     Float trim_error_rate = 0.15
     Float assemble_error_rate = 0.15
     String medaka_model = "r941_min_high_g360"
-    String participant_name
+    String sample_name
     String prefix
   }
   
@@ -67,7 +67,7 @@ workflow ONT_assembly_with_canu {
     input:
     asm_fasta = MedakaPolish.polished_assembly,
     ref_fasta = reference,
-    participant_name = participant_name,
+    sample_name = sample_name,
     prefix = prefix + ".canu"
   }
   

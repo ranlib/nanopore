@@ -9,7 +9,7 @@
   ],
   "ONT_assembly_with_raven.graphical_fragment_assembly": "raven_assembly_graph.gfa",
   "ONT_assembly_with_raven.medaka_model": "r941_min_high_g360",
-  "ONT_assembly_with_raven.participant_name": "Dieter",
+  "ONT_assembly_with_raven.sample_name": "Dieter",
   "ONT_assembly_with_raven.prefix": "asm",
   "ONT_assembly_with_raven.reference": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa"
 }

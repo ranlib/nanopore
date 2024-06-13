@@ -15,7 +15,7 @@ workflow ONT_assembly_with_raven {
     fastqs: { description: "input fastq files for a sample" }
     reference: { description: "reference sequence"}
     medaka_model: { description: "Medaka polishing model name"}
-    participant_name: { description: "name of the participant from whom these samples were obtained"}
+    sample_name: { description: "name of sample"}
     prefix: { description: "prefix for output files"}
     graphical_fragment_assembly: { description: "graph file of raven assembly"}
     n_rounds: { description: "number of medaka polishing rounds"}
@@ -25,7 +25,7 @@ workflow ONT_assembly_with_raven {
     Array[File]+ fastqs
     File reference
     String medaka_model = "r941_min_high_g360"
-    String participant_name
+    String sample_name
     String prefix
     String graphical_fragment_assembly
     Int n_rounds = 1
@@ -60,7 +60,7 @@ workflow ONT_assembly_with_raven {
     input:
     asm_fasta = MedakaPolish.polished_assembly,
     ref_fasta = reference,
-    participant_name = participant_name,
+    sample_name = sample_name,
     prefix = prefix + ".raven"
   }
 

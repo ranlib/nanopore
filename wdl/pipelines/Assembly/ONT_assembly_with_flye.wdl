@@ -15,7 +15,7 @@ workflow ONT_assembly_with_flye {
     fastqs: { description: "input fastq files for a sample" }
     reference: { description: "reference sequence"}
     medaka_model: { description: "Medaka polishing model name"}
-    participant_name: { description: "name of the participant from whom these samples were obtained"}
+    sample_name: { description: "name of sample"}
     prefix: { description: "prefix for output files"}
     n_rounds: { description: "number of medaka polishing rounds"}
   }
@@ -24,7 +24,8 @@ workflow ONT_assembly_with_flye {
     Array[File]+ fastqs
     File reference
     String medaka_model = "r941_min_high_g360"
-    String participant_name
+    String sample_name
+    String read_type
     String prefix
     Int n_rounds = 1
   }
@@ -33,10 +34,11 @@ workflow ONT_assembly_with_flye {
 
   call Utils.MergeFastqs { input: fastqs = fastqs }
   
+  #  genome_size = ComputeGenomeLength.length,
   call Flye.Flye {
     input:
     reads = MergeFastqs.merged_fastq,
-    genome_size = ComputeGenomeLength.length,
+    read_type = read_type,
     prefix = prefix,
   }
   
@@ -59,7 +61,7 @@ workflow ONT_assembly_with_flye {
     input:
     asm_fasta = MedakaPolish.polished_assembly,
     ref_fasta = reference,
-    participant_name = participant_name,
+    sample_name = sample_name,
     prefix = prefix + ".flye"
   }
 
