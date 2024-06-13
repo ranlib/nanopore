@@ -1,20 +1,19 @@
 version 1.0
 
-import "../../tasks/Alignment/AlignReads.wdl" as Align
 import "../../tasks/Alignment/wf_minimap2.wdl" as Minimap2
 import "../../tasks/Postprocessing/Pilon.wdl" as Pilon
 
 workflow polish_with_illumina {
   
   meta {
-    description: "Perform polishing of long-read assembly with illumina reads."
+    description: "Perform polishing of long-read assembly with illumina reads using Pilon"
   }
   
   parameter_meta {
     fastq: { description: "input fastq file" }
     ref_map_file: { description: "reference sequence"}
     medaka_model: { description: "Medaka polishing model name"}
-    participant_name: { description: "name of the participant from whom these samples were obtained"}
+    sample_name: { description: "name of the sample"}
     prefix: { description: "prefix for output files"}
     n_rounds: { description: "number of medaka polishing rounds"}
   }
@@ -29,18 +28,6 @@ workflow polish_with_illumina {
     String prefix = "out"
     RuntimeAttr? runtime_attr_override
   }
-
-  # call Align.Minimap2 {
-  #   input:
-  #   reads = reads,
-  #   ref_fasta = ref_fasta,
-  #   RG = RG,
-  #   map_preset = map_preset,
-  #   library = library,
-  #   tags_to_preserve = tags_to_preserve,
-  #   prefix = prefix,
-  #   runtime_attr_override = runtime_attr_override
-  # }
 
   call Minimap2.wf_minimap2 {
     input:
