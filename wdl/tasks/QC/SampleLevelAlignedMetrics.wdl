@@ -2,8 +2,6 @@ version 1.0
 
 import "../Utilities/Utils.wdl"
 import "../Visualization/NanoPlot.wdl" as NP
-import "../QC/AlignedMetrics.wdl" as AM
-
 
 workflow SampleLevelAlignedMetrics {
 
@@ -23,8 +21,6 @@ workflow SampleLevelAlignedMetrics {
         File aligned_bai
 
         File ref_fasta
-
-        File? bed_to_compute_coverage
     }
 
     call Utils.ComputeGenomeLength { input: fasta = ref_fasta }
