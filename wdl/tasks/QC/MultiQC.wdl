@@ -35,7 +35,7 @@ task task_multiqc {
   input {
     Array[File] inputFiles
     String outputPrefix
-    String docker = "multiqc/multiqc:v1.21"
+    String docker = "multiqc/multiqc:v1.25"
     String memory = "8GB"
   }
   
