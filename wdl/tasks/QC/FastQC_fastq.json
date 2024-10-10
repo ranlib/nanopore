@@ -1,0 +1,6 @@
+{
+    "FastQC_fastq.forwardReads": "/data/baratii_Illumina_fastq/20220210_CDP002_Baratii-2_Illumina_from_Seqmatic/CDPH-28_03E-00049-22_S6_L001_R1_001.fastq.gz",
+    "FastQC_fastq.reverseReads": "/data/baratii_Illumina_fastq/20220210_CDP002_Baratii-2_Illumina_from_Seqmatic/CDPH-28_03E-00049-22_S6_L001_R2_001.fastq.gz",
+    "FastQC_fastq.threads": 4
+}
+
