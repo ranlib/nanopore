@@ -4,7 +4,7 @@
     "boot_disk_gb": 30,
     "cpu_cores": 2,
     "disk_gb": 100,
-    "docker": "dbest/samtools:v1.20",
+    "docker": "dbest/samtools:v1.21",
     "max_retries": 1,
     "mem_gb": 100,
     "preemptible_tries": 1
