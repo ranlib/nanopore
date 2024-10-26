@@ -1,5 +1,5 @@
 {
-    "SampleLevelAlignedMetrics.ComputeGenomeLength.runtime_attr_override": { "cpu_cores" : 5, "max_retries" : 0, "boot_disk_gb" : 10, "docker" : "dbest/samtools:v1.20", "disk_gb" : 10, "mem_gb" : 100, "preemptible_tries" : 0 },
+    "SampleLevelAlignedMetrics.ComputeGenomeLength.runtime_attr_override": { "cpu_cores" : 5, "max_retries" : 0, "boot_disk_gb" : 10, "docker" : "dbest/samtools:v1.21", "disk_gb" : 10, "mem_gb" : 100, "preemptible_tries" : 0 },
     "SampleLevelAlignedMetrics.NanoPlotFromBam.runtime_attr_override": { "cpu_cores" : 1, "nmax_retries" : 0, "boot_disk_gb" : 10, "docker" : "dbest/nanoplot:v1.42.0", "disk_gb" : 10, "mem_gb" : 10, "preemptible_tries" : 0 },
     "SampleLevelAlignedMetrics.aligned_bai": "/home/dbest/Analysis/baratii_QC/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bai/barcode03.bam.bai",
     "SampleLevelAlignedMetrics.aligned_bam": "/home/dbest/Analysis/baratii_QC/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bam/barcode03.bam",
