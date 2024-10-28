@@ -1,6 +1,5 @@
 version 1.0
 
-import "../Utilities/Utils.wdl"
 import "../Utilities/VariantUtils.wdl"
 import "Sniffles2.wdl" as Sniffles2
 import "Clair.wdl" as Clair3
@@ -23,7 +22,7 @@ workflow CallVariantsONT {
     ref_dict: "Reference FASTA dictionary file"
     
     call_svs: "Call structural variants"
-    fast_less_sensitive_sv: "to trade less sensitive SV calling for faster speed"
+    #fast_less_sensitive_sv: "to trade less sensitive SV calling for faster speed"
     
     call_small_variants: "Call small variants"
     sites_vcf: "for use with Clair"
@@ -42,7 +41,7 @@ workflow CallVariantsONT {
     File ref_dict
     
     Boolean call_svs
-    Boolean fast_less_sensitive_sv
+    #Boolean fast_less_sensitive_sv
     
     Boolean call_small_variants
     File? sites_vcf
