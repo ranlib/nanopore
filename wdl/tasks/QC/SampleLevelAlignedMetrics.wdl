@@ -6,14 +6,13 @@ import "../Visualization/NanoPlot.wdl" as NP
 workflow SampleLevelAlignedMetrics {
 
   meta {
-    description: "A utility (sub-)workflow to compute coverage on sample-level BAM, and optionally over a provided BED file"
+    description: "A utility (sub-)workflow to compute coverage on sample-level BAM"
   }
   
   parameter_meta {
     aligned_bam: "Aligned BAM file"
     aligned_bai: "Index for the aligned BAM file"
     ref_fasta: "Reference FASTA file"
-    bed_to_compute_coverage: "Optional BED file to compute coverage over"
   }
   
   input {
