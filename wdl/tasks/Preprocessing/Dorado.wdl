@@ -111,7 +111,7 @@ task makefastqs {
   }
   
   runtime {
-    docker: "dbest/samtools:v1.20"
+    docker: "dbest/samtools:v1.21"
     memory: "64G"
     disks: "local-disk 500 SSD"
     cpu: 8

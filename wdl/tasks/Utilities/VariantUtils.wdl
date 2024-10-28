@@ -54,7 +54,7 @@ task MergePerChrCalls {
         boot_disk_gb:       10,
         preemptible_tries:  1,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -187,7 +187,7 @@ task MergeAndSortVCFs {
         boot_disk_gb:       10,
         preemptible_tries:  1,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -252,7 +252,7 @@ task CollectDefinitions {
         boot_disk_gb:       10,
         preemptible_tries:  1,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -358,7 +358,7 @@ task SubsetVCF {
         boot_disk_gb:       10,
         preemptible_tries:  2,
         max_retries:        1,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -412,7 +412,7 @@ task ZipAndIndexVCF {
         boot_disk_gb:       10,
         preemptible_tries:  2,
         max_retries:        2,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -459,7 +459,7 @@ task IndexVCF {
         boot_disk_gb:       10,
         preemptible_tries:  2,
         max_retries:        2,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -647,7 +647,7 @@ task FixSnifflesVCF {
         boot_disk_gb:       10,
         preemptible_tries:  2,
         max_retries:        2,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -1818,7 +1818,7 @@ task CompressAndIndex {
         boot_disk_gb:       10,
         preemptible_tries:  0,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -1868,7 +1868,7 @@ task ConcatBCFs {
         boot_disk_gb:       10,
         preemptible_tries:  1,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {

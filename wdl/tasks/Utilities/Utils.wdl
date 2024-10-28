@@ -41,7 +41,7 @@ task ComputeGenomeLength {
         boot_disk_gb:       10,
         preemptible_tries:  0,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -160,7 +160,7 @@ task MergeBams {
         boot_disk_gb:       10,
         preemptible_tries:  0,
         max_retries:        0,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -213,7 +213,7 @@ task Index {
         boot_disk_gb:       10,
         preemptible_tries:  1,
         max_retries:        1,
-        docker:             "dbest/samtools:v1.20"
+        docker:             "dbest/samtools:v1.21"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
