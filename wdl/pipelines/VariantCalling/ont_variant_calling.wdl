@@ -18,7 +18,6 @@ workflow ont_variant_calling {
     sample_name:     "name of the sample"
     
     call_svs:               "whether to call SVs"
-    fast_less_sensitive_sv: "to trade less sensitive SV calling for faster speed"
     
     call_small_variants: "whether to call small variants"
     sites_vcf:     "for use with Clair"
@@ -30,9 +29,6 @@ workflow ont_variant_calling {
     Array[File]+ aligned_bams
     Array[File]+ aligned_bais
 
-    #Boolean bams_suspected_to_contain_dup_record
-    File? bed_to_compute_coverage
-    
     File reference
     File reference_fai
     File reference_dict
@@ -40,7 +36,6 @@ workflow ont_variant_calling {
     String sample_name
     
     Boolean call_svs = true
-    Boolean? fast_less_sensitive_sv = true
     
     Boolean call_small_variants = true
     File? sites_vcf
@@ -68,8 +63,7 @@ workflow ont_variant_calling {
     input:
     aligned_bam = usable_bam,
     aligned_bai = usable_bai,
-    ref_fasta   = reference,
-    bed_to_compute_coverage = bed_to_compute_coverage
+    ref_fasta   = reference
   }
   
   if (call_svs || call_small_variants) {
@@ -82,12 +76,8 @@ workflow ont_variant_calling {
       ref_fasta         = reference,
       ref_fasta_fai     = reference_fai,
       ref_dict          = reference_dict,
-
       prefix = sample_name,
-      
       call_svs = call_svs,
-      fast_less_sensitive_sv = select_first([fast_less_sensitive_sv]),
-      
       call_small_variants = call_small_variants,
       sites_vcf = sites_vcf,
       sites_vcf_tbi = sites_vcf_tbi,
