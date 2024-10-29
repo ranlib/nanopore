@@ -60,15 +60,15 @@ workflow CallVariantsONT {
       preset = "ONT"
     }
     
-    call VariantUtils.ZipAndIndexVCF as ZipAndIndexClairVCF {
-      input:
-      vcf = Clair.vcf
-    }
+    #call VariantUtils.ZipAndIndexVCF as ZipAndIndexClairVCF {
+    #  input:
+    #  vcf = Clair.vcf
+    #}
 
-    call VariantUtils.ZipAndIndexVCF as ZipAndIndexClair_gVCF {
-      input:
-      vcf = Clair.gvcf
-    }
+    #call VariantUtils.ZipAndIndexVCF as ZipAndIndexClair_gVCF {
+    #  input:
+    #  vcf = Clair.gvcf
+    #}
   }
   
   if (call_svs) {
@@ -91,10 +91,10 @@ workflow CallVariantsONT {
     File? sniffles_vcf = ZipAndIndexSnifflesVCF.vcfgz
     File? sniffles_tbi = ZipAndIndexSnifflesVCF.tbi
 
-    File? clair_vcf = ZipAndIndexClairVCF.vcfgz
-    File? clair_tbi = ZipAndIndexClairVCF.tbi
+    File? clair_vcf = Clair.vcf # ZipAndIndexClairVCF.vcfgz
+    File? clair_tbi = Clair.vcf_tbi # ZipAndIndexClairVCF.tbi
 
-    File? clair_gvcf = ZipAndIndexClair_gVCF.vcfgz
-    File? clair_gtbi = ZipAndIndexClair_gVCF.tbi
+    File? clair_gvcf = Clair.gvcf # ZipAndIndexClair_gVCF.vcfgz
+    File? clair_gtbi = Clair.gvcf_tbi # ZipAndIndexClair_gVCF.tbi
   }
 }
