@@ -1,0 +1,6 @@
+{
+  "wf_bcftools_stats.input_vcf": ["temp.vcf"],
+  "wf_bcftools_stats.options": "",
+  "wf_bcftools_stats.task_bcftools_stats.docker": "biocontainers/bcftools:v1.12-1-deb_cv1",
+  "wf_bcftools_stats.task_bcftools_stats.memory": "2GB"
+}
