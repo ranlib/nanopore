@@ -14,6 +14,7 @@ doc_ont_variant_calling:
 	mkdir -p $(docs_dir)
 	mv *.md *.jpeg *.pdf $(docs_dir)
 
+# about 8 min per sample
 run_ont_variant_calling:
 	time miniwdl run --debug --dir test-ont_variant_calling --cfg ../../../miniwdl_production.cfg --input ont_variant_calling.json ont_variant_calling.wdl
 

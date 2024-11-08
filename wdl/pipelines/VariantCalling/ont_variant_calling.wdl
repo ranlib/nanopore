@@ -3,6 +3,7 @@ version 1.0
 import "../../tasks/Utilities/Utils.wdl" as Utils
 import "../../tasks/VariantCalling/CallVariantsONT.wdl" as VAR
 import "../../tasks/QC/SampleLevelAlignedMetrics.wdl" as COV
+import "../../pipelines/Annotation/task_snpEff.wdl" as snpEff
 
 workflow ont_variant_calling {
   
@@ -11,18 +12,17 @@ workflow ont_variant_calling {
   }
   
   parameter_meta {
-    aligned_bams:       "path to aligned BAM files"
-    aligned_bais:       "path to aligned BAM file indices"
-    
-    reference:       "reference sequence"
-    sample_name:     "name of the sample"
-    
-    call_svs:               "whether to call SVs"
-    
+    aligned_bams: "path to aligned BAM files"
+    aligned_bais: "path to aligned BAM file indices"
+    reference:    "reference sequence"
+    sample_name:  "name of the sample"
+    call_svs:     "whether to call SVs"
     call_small_variants: "whether to call small variants"
     sites_vcf:     "for use with Clair"
     sites_vcf_tbi: "for use with Clair"
-
+    dataDir: "zip file of snpEff data directory"
+    config: "snpEff config file"
+    genome: "name of genome to be used"
   }
   
   input {
@@ -40,6 +40,11 @@ workflow ont_variant_calling {
     Boolean call_small_variants = true
     File? sites_vcf
     File? sites_vcf_tbi
+
+    Boolean call_snpEff = true
+    File dataDir
+    File config
+    String genome
   }
   
   if (length(aligned_bams) > 1) {
@@ -67,7 +72,6 @@ workflow ont_variant_calling {
   }
   
   if (call_svs || call_small_variants) {
-    
     call VAR.CallVariantsONT {
       input:
       bam               = usable_bam,
@@ -82,9 +86,18 @@ workflow ont_variant_calling {
       sites_vcf = sites_vcf,
       sites_vcf_tbi = sites_vcf_tbi,
     }
-    
+
+    if ( call_snpEff ) {
+      call snpEff.task_snpEff {
+	input:
+	vcf = select_first([CallVariantsONT.clair_vcf]),
+	genome = genome,
+	config = config,
+	dataDir = dataDir
+      }
+    }
   }
-  
+
   output {
     Float aligned_num_reads = coverage.aligned_num_reads
     Float aligned_num_bases = coverage.aligned_num_bases
@@ -107,5 +120,9 @@ workflow ont_variant_calling {
     
     File? clair_gvcf = CallVariantsONT.clair_gvcf
     File? clair_gtbi = CallVariantsONT.clair_gtbi
+
+    File? outputVcf = task_snpEff.outputVcf
+    File? snpEff_summary_csv = task_snpEff.snpEff_summary_csv 
+    File? snpEff_summary_html = task_snpEff.snpEff_summary_html
   }
 }
