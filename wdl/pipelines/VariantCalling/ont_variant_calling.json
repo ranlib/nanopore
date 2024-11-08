@@ -24,7 +24,7 @@
   "ont_variant_calling.reference_dict": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa.dict",
   "ont_variant_calling.reference_fai": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa.fai",
   "ont_variant_calling.sample_name": "barcode03",
-  "ont_variant_calling.task_snpEff.docker": "dbest/snpeff:v5.2a",
+  "ont_variant_calling.task_snpEff.docker": "dbest/snpeff:v5.2e",
   "ont_variant_calling.task_snpEff.hgvs": true,
   "ont_variant_calling.task_snpEff.lof": true,
   "ont_variant_calling.task_snpEff.memory": "9G",
