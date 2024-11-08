@@ -10,20 +10,20 @@
     "preemptible_tries": 1
   },
   "ont_variant_calling.aligned_bais": [
-    "/home/dbest/Analysis/nanopore/wdl/pipelines/Alignment/test-Alignment/20240607_172915_Alignment/out/aligned_bai/out.bam.bai"
+    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bai/barcode03.bam.bai"
   ],
   "ont_variant_calling.aligned_bams": [
-    "/home/dbest/Analysis/nanopore/wdl/pipelines/Alignment/test-Alignment/20240607_172915_Alignment/out/aligned_bam/out.bam"
+    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bam/barcode03.bam"
   ],
   "ont_variant_calling.call_small_variants": true,
   "ont_variant_calling.call_svs": true,
-  "ont_variant_calling.config": "/home/dbest/Analysis/nanopore/data/S_aureus/snpEff_database/snpEff.config",
-  "ont_variant_calling.dataDir": "/home/dbest/Analysis/nanopore/data/S_aureus/snpEff_database/snpEff.zip",
-  "ont_variant_calling.genome": "CP000253.1",
-  "ont_variant_calling.reference": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta",
-  "ont_variant_calling.reference_dict": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta.dict",
-  "ont_variant_calling.reference_fai": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta.fai",
-  "ont_variant_calling.sample_name": "S_aureus_JKD6159",
+  "ont_variant_calling.config": "/home/dbest/Analysis/nanopore/snpEff_database/snpEff.config",
+  "ont_variant_calling.dataDir": "/home/dbest/Analysis/nanopore/snpEff_database/snpEff.zip",
+  "ont_variant_calling.genome": "NZ_CP014204.2",
+  "ont_variant_calling.reference": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa",
+  "ont_variant_calling.reference_dict": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa.dict",
+  "ont_variant_calling.reference_fai": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa.fai",
+  "ont_variant_calling.sample_name": "barcode03",
   "ont_variant_calling.task_snpEff.docker": "dbest/snpeff:v5.2a",
   "ont_variant_calling.task_snpEff.hgvs": true,
   "ont_variant_calling.task_snpEff.lof": true,
