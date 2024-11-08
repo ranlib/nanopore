@@ -1,0 +1,16 @@
+{
+    "wf_snpEff.config": "/home/dbest/Analysis/nanopore/snpEff_database/snpEff.config",
+    "wf_snpEff.dataDir": "/home/dbest/Analysis/nanopore/snpEff_database/snpEff.zip",
+    "wf_snpEff.genome": "NZ_CP014204.2",
+    "wf_snpEff.task_snpEff.docker": "dbest/snpeff:v5.2a",
+    "wf_snpEff.task_snpEff.hgvs": true,
+    "wf_snpEff.task_snpEff.lof": true,
+    "wf_snpEff.task_snpEff.memory": "9G",
+    "wf_snpEff.task_snpEff.noDownstream": false,
+    "wf_snpEff.task_snpEff.noIntergenic": false,
+    "wf_snpEff.task_snpEff.noShiftHgvs": false,
+    "wf_snpEff.task_snpEff.outputPath": "./snpeff.vcf",
+    "wf_snpEff.task_snpEff.upDownStreamLen": 5000,
+    "wf_snpEff.vcf": "/home/dbest/Analysis/baratii1_20/batch_variant_calling/batch1/samples/barcode06/20241028_184831_ont_variant_calling/out/clair_vcf/merge_output.vcf.gz"
+}
+
