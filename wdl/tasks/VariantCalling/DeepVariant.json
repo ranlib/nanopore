@@ -1,0 +1,8 @@
+{
+  "DeepVariant.bai": "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bai/barcode03.bam.bai",
+  "DeepVariant.bam": "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bam/barcode03.bam",
+  "DeepVariant.dv_memory": 200,
+  "DeepVariant.dv_threads": 64,
+  "DeepVariant.ref_fasta": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa",
+  "DeepVariant.ref_fasta_fai": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa.fai"
+}

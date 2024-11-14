@@ -12,16 +12,10 @@ workflow DeepVariant {
     input {
         File bam
         File bai
-
         File ref_fasta
         File ref_fasta_fai
-
-        Int pepper_threads
-        Int pepper_memory
-
         Int dv_threads
         Int dv_memory
-
         String zones = "us-central1-b us-central1-c"
     }
 
@@ -69,54 +63,41 @@ task DV {
     }
 
     String prefix = basename(bam, ".bam") + ".deepvariant"
-    String output_root = "/cromwell_root/dv_output"
-
     Int bam_sz = ceil(size(bam, "GB"))
     Boolean is_big_bam = bam_sz > 100
     Int inflation_factor = if (is_big_bam) then 10 else 5
     Int minimal_disk = 1000
-	Int disk_size = if inflation_factor * bam_sz > minimal_disk then inflation_factor * bam_sz else minimal_disk
+    Int disk_size = if inflation_factor * bam_sz > minimal_disk then inflation_factor * bam_sz else minimal_disk
 
     command <<<
         set -euxo pipefail
-
         num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
-
-        mkdir -p "~{output_root}"
-
         /opt/deepvariant/bin/run_deepvariant \
             --model_type=WGS \
             --ref=~{ref_fasta} \
             --reads=~{bam} \
-            --output_vcf="~{output_root}/~{prefix}.vcf.gz" \
-            --output_gvcf="~{output_root}/~{prefix}.g.vcf.gz" \
+            --output_vcf=~{prefix}.vcf.gz \
+            --output_gvcf=~{prefix}.g.vcf.gz \
             --num_shards="${num_core}"
-
-        find "~{output_root}/" -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g' \
-            > "~{output_root}/dir_structure.txt"
     >>>
 
     output {
-        File output_dir_structure = "~{output_root}/dir_structure.txt"
-
-        File VCF        = "~{output_root}/~{prefix}.vcf.gz"
-        File VCF_tbi    = "~{output_root}/~{prefix}.vcf.gz.tbi"
-
-        File gVCF       = "~{output_root}/~{prefix}.g.vcf.gz"
-        File gVCF_tbi   = "~{output_root}/~{prefix}.g.vcf.gz.tbi"
-
-        File visual_report_html = "~{output_root}/~{prefix}.visual_report.html"
+      File VCF        = prefix + ".vcf.gz"
+      File VCF_tbi    = prefix + ".vcf.gz.tbi"
+      File gVCF       = prefix + ".g.vcf.gz"
+      File gVCF_tbi   = prefix + ".g.vcf.gz.tbi"
+      File visual_report_html = prefix + ".visual_report.html"
     }
-
+    
     #########################
     RuntimeAttr default_attr = object {
-        cpu_cores:          threads,
-        mem_gb:             memory,
-        disk_gb:            disk_size,
-        boot_disk_gb:       100,
-        preemptible_tries:  3,
-        max_retries:        0,
-        docker:             "google/deepvariant:1.4.0"
+      cpu_cores:          threads,
+      mem_gb:             memory,
+      disk_gb:            disk_size,
+      boot_disk_gb:       100,
+      preemptible_tries:  3,
+      max_retries:        0,
+      docker:             "google/deepvariant:1.6.1"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
