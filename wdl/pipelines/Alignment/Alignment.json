@@ -1,8 +1,8 @@
 {
     "Alignment.runtime_attr_override": { "cpu_cores" : 2, "nmax_retries" : 1, "boot_disk_gb" : 10, "docker" :  "dbest/minimap2:2.28", "disk_gb" : 100, "mem_gb" : 100, "preemptible_tries" : 1 },
     "Alignment.reads": ["/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_ONT_R10.4_guppy_v6.1.7.fastq.gz"],
-    "Alignment.RG": "",
-    "Alignment.prefix": "out",
+    "Alignment.RG": '@RG\\tID:S_aureus_JKD6159\\tSM:S_aureus_JKD6159',
+    "Alignment.prefix": "S_aureus_JKD6159",
     "Alignment.tags_to_preserve": [],
     "Alignment.ref_fasta": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta",
     "Alignment.map_preset": "sr"
