@@ -15,5 +15,5 @@ doc_Alignment:
 	cp *.md *.jpeg *.pdf $(docs_dir)
 
 run_Alignment:
-	miniwdl run --debug --dir test-Alignment --cfg ../../../miniwdl_production.cfg --input Alignment.json Alignment.wdl
+	time miniwdl run --debug --dir test-Alignment --cfg ../../../miniwdl_production.cfg --input Alignment.json Alignment.wdl
 
