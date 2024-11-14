@@ -12,8 +12,8 @@ workflow Sniffles2 {
 
     parameter_meta {
         # input
-        sampleBAMs:      "GCS paths to aligned BAM files from multiple samples"
-        sampleBAIs:       "GCS paths to aligned BAM files indices from multiple samples"
+        sampleBAMs:      "paths to aligned BAM files from multiple samples"
+        sampleBAIs:      "paths to aligned BAM files indices from multiple samples"
         sampleIDs:       "matching sample IDs of the BAMs"
         minsvlen:        "Minimum SV length in bp"
         prefix:          "prefix for output files"
@@ -93,7 +93,6 @@ task SampleSV {
                  --sample-id ~{sample_id} \
                  --vcf ~{vcf_output} \
                  --snf ~{snf_output}
-        tree
     >>>
 
     output {
@@ -103,13 +102,13 @@ task SampleSV {
 
     #########################
     RuntimeAttr default_attr = object {
-        cpu_cores:          cpus,
-        mem_gb:             46,
-        disk_gb:            disk_size,
-        boot_disk_gb:       10,
-        preemptible_tries:  3,
-        max_retries:        2,
-        docker:             "us.gcr.io/broad-dsp-lrma/lr-sniffles2:2.0.6"
+      cpu_cores:          cpus,
+      mem_gb:             46,
+      disk_gb:            disk_size,
+      boot_disk_gb:       10,
+      preemptible_tries:  3,
+      max_retries:        2,
+      docker:             "dbest/sniffles2:v2.4"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
@@ -142,9 +141,7 @@ task MergeCall {
 
     command <<<
         set -eux
-        sniffles --input ~{sep=" " snfs} \
-            --vcf multisample.vcf
-        tree
+        sniffles --input ~{sep=" " snfs} --vcf multisample.vcf
     >>>
 
     output {
@@ -153,7 +150,7 @@ task MergeCall {
 
     Int cpus = 8
     Int disk_size = 3*ceil(size(snfs, "GB"))
-                                                                                                                                                                                                                                                                                                                                                                                                                                   #########################
+                                                                                                                                                                                                                                                                                     
     RuntimeAttr default_attr = object {
         cpu_cores:          cpus,
         mem_gb:             46,
@@ -161,7 +158,7 @@ task MergeCall {
         boot_disk_gb:       10,
         preemptible_tries:  3,
         max_retries:        2,
-        docker:             "us.gcr.io/broad-dsp-lrma/lr-sniffles2:2.0.6"
+        docker:             "dbest/sniffles2:v2.4"
     }
     RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
     runtime {
