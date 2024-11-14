@@ -16,10 +16,10 @@ task task_snpEff {
       String stats = "snpEff_summary.html"
       String csvStats = "snpEff_summary.csv"
       String memory = "9G"
-      String docker = "dbest/snpeff:v5.2a"
+      String docker = "dbest/snpeff:v5.2e"
     }
     
-    command {
+    command <<<
       set -ex
       mkdir -p "$(dirname ~{outputPath})"
       unzip ~{dataDir}
@@ -41,7 +41,7 @@ task task_snpEff {
       ~{vcf} \
       > ~{outputPath}
       rm -r "$PWD"/data
-    }
+    >>>
     
     output {
       File outputVcf = outputPath
