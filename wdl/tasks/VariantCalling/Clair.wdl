@@ -61,8 +61,8 @@ task Clair {
       --platform=~{platform} \
       --model_path="/opt/models/~{platform}" \
       --gvcf ~{true='--ctg_name=' false='' defined(chr)}~{select_first([chr, "--include_all_ctgs"])} \
+      --sample_name=$SM \
       --output="./"
-      #--sample_name=$SM \
     >>>
 
     output {
