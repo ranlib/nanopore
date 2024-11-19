@@ -84,8 +84,8 @@ task DV {
     output {
       File VCF        = prefix + ".vcf.gz"
       File VCF_tbi    = prefix + ".vcf.gz.tbi"
-      File gVCF       = prefix + ".g.vcf.gz"
-      File gVCF_tbi   = prefix + ".g.vcf.gz.tbi"
+      File gVCF       = prefix + ".gvcf.gz"
+      File gVCF_tbi   = prefix + ".gvcf.gz.tbi"
       File visual_report_html = prefix + ".visual_report.html"
     }
     
