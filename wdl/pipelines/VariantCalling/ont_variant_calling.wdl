@@ -89,6 +89,7 @@ workflow ont_variant_calling {
     }
 
     if ( call_snpEff ) {
+      # Clair3
       String annotated_clair_vcf = sample_name + "_clair_snpEff.vcf"
       call snpEff.task_snpEff as annotate_clair_vcf {
 	input:
@@ -103,7 +104,8 @@ workflow ont_variant_calling {
 	input:
 	vcf = annotate_clair_vcf.outputVcf
       }
-      
+
+      # Sniffles
       String annotated_sniffles_vcf = sample_name + "_sniffles_snpEff.vcf"
       call snpEff.task_snpEff as annotate_sniffles_vcf {
 	input:
@@ -119,18 +121,18 @@ workflow ont_variant_calling {
 	vcf = annotate_sniffles_vcf.outputVcf
       }
 
-      call VariantUtils.FixSnifflesVCF {
-	input:
-        vcf = annotate_sniffles_vcf.outputVcf,
-        sample_name = sample_name
-      }
+      # call VariantUtils.FixSnifflesVCF {
+      # 	input:
+      #   vcf = annotate_sniffles_vcf.outputVcf,
+      #   sample_name = sample_name
+      # }
       
-      #call VariantUtils.MergeAndSortVCFs {
-#	input:
-#	prefix = sample_name,
-#	vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
-#	ref_fasta_fai = reference_fai
-#     }
+      call VariantUtils.MergeAndSortVCFs {
+	input:
+	prefix = sample_name,
+	vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
+	ref_fasta_fai = reference_fai
+      }
     }
   }
     
@@ -172,7 +174,7 @@ workflow ont_variant_calling {
     File? sniffles_snpEff_tbi = ZipAndIndexSnifflesVCF.tbi
 
     # merged
-#    File? merged_vcf = MergeAndSortVCFs.vcf
-#    File? merged_tbi = MergeAndSortVCFs.tbi
+    File? merged_vcf = MergeAndSortVCFs.vcf
+    File? merged_tbi = MergeAndSortVCFs.tbi
   }
 }

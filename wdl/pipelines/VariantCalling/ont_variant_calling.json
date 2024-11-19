@@ -26,10 +26,10 @@
     "preemptible_tries": 1
   },
   "ont_variant_calling.aligned_bais": [
-    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bai/barcode03.bam.bai"
+    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch2/samples/barcode03/20241115_161238_Alignment/out/aligned_bai/barcode03.bam.bai"
   ],
   "ont_variant_calling.aligned_bams": [
-    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch1/samples/barcode03/20241010_143022_Alignment/out/aligned_bam/barcode03.bam"
+    "/home/dbest/Analysis/baratii1_20/batch_alignment/batch2/samples/barcode03/20241115_161238_Alignment/out/aligned_bam/barcode03.bam"
   ],
   "ont_variant_calling.annotate_clair_vcf.csvStats": "snpEff_summary.csv",
   "ont_variant_calling.annotate_clair_vcf.docker": "dbest/snpeff:v5.2e",
