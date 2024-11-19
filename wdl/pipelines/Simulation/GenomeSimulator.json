@@ -1,0 +1,20 @@
+{
+  "GenomeSimulator.SimulateReads.docker": "dbest/nanosim:v3.2.2",
+  "GenomeSimulator.basecaller": "String? (optional)",
+  "GenomeSimulator.chimeric": false,
+  "GenomeSimulator.dna_type": "circular",
+  "GenomeSimulator.fastq": true,
+  "GenomeSimulator.kmer_bias": "Int? (optional)",
+  "GenomeSimulator.max_length": "Int? (optional)",
+  "GenomeSimulator.median_length": "Int? (optional)",
+  "GenomeSimulator.min_length": 50,
+  "GenomeSimulator.model_prefix": "training",
+  "GenomeSimulator.num_threads": 1,
+  "GenomeSimulator.number_of_reads": 20000,
+  "GenomeSimulator.output_prefix": "simulated",
+  "GenomeSimulator.perfect": false,
+  "GenomeSimulator.ref_genome": "File",
+  "GenomeSimulator.seed": "Int? (optional)",
+  "GenomeSimulator.standard_deviation": "Float? (optional)",
+  "GenomeSimulator.strandness": "Float? (optional)"
+}
