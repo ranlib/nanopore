@@ -115,7 +115,7 @@ task MergeAndSortVCFs {
             -f all_raw_vcfs.txt \
             --output-type v \
             -o concatedated_raw.vcf.gz  # fast, at the expense of disk space
-        for vcf in ~{sep=' ' vcfs}; do rm $vcf ; done
+        #for vcf in ~{sep=' ' vcfs}; do rm $vcf ; done
 
         # this is another bug in bcftools that's hot fixed but not in official release yet
         # (see bcftools github issue 1591)
