@@ -1,0 +1,14 @@
+{
+  "ReadAnalysis.AnalyzeReads.docker": "dbest/nanosim:v3.2.2",
+  "ReadAnalysis.aligner": "minimap2",
+  "ReadAnalysis.analyze_fastq": true,
+  "ReadAnalysis.analyze_homopolymer": false,
+  "ReadAnalysis.detect_chimeric": false,
+  "ReadAnalysis.disable_model_fit": false,
+  "ReadAnalysis.genome_alignment": "File? (optional)",
+  "ReadAnalysis.min_homopolymer_length": 5,
+  "ReadAnalysis.num_threads": 24,
+  "ReadAnalysis.output_prefix": "training",
+  "ReadAnalysis.read_file": "File",
+  "ReadAnalysis.reference_genome": 
+}
