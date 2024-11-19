@@ -1,5 +1,5 @@
 {
-  "Alignment.RG": "'@RG\\tID:S_aureus_JKD6159\\tSM:S_aureus_JKD6159'",
+  "Alignment.RG": "@RG\\tID:S_aureus_JKD6159\\tSM:S_aureus_JKD6159",
   "Alignment.map_preset": "sr",
   "Alignment.prefix": "S_aureus_JKD6159",
   "Alignment.reads": [
