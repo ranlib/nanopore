@@ -121,12 +121,7 @@ workflow ont_variant_calling {
 	vcf = annotate_sniffles_vcf.outputVcf
       }
 
-      # call VariantUtils.FixSnifflesVCF {
-      # 	input:
-      #   vcf = annotate_sniffles_vcf.outputVcf,
-      #   sample_name = sample_name
-      # }
-      
+      # merge
       call VariantUtils.MergeAndSortVCFs {
 	input:
 	prefix = sample_name,
