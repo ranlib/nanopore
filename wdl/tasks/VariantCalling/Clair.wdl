@@ -35,6 +35,7 @@ task Clair {
         File? sites_vcf_tbi
 
         String? chr
+        String? is_haploid
         String preset
 
         RuntimeAttr? runtime_attr_override
@@ -60,8 +61,10 @@ task Clair {
       --threads=${num_core} \
       --platform=~{platform} \
       --model_path="/opt/models/~{platform}" \
-      --gvcf ~{true='--ctg_name=' false='' defined(chr)}~{select_first([chr, "--include_all_ctgs"])} \
-      --sample_name=$SM \
+      --gvcf \
+      ~{true='--ctg_name=' false='' defined(chr)}~{select_first([chr, "--include_all_ctgs"])} \
+      ~{true="--no_phasing_for_fa" false="" defined(is_haploid)} \
+      --sample_name=${SM} \
       --output="./"
     >>>
 
@@ -72,9 +75,9 @@ task Clair {
         File? full_alignment_tbi = "full_alignment.vcf.gz.tbi"
 
         # save both VCF and gVCF
-        File vcf = "merge_output.vcf.gz"
+        File? vcf = "merge_output.vcf.gz"
         File? vcf_tbi = "merge_output.vcf.gz.tbi"
-        File gvcf = "merge_output.gvcf.gz"
+        File? gvcf = "merge_output.gvcf.gz"
         File? gvcf_tbi = "merge_output.gvcf.gz.tbi"
     }
 
