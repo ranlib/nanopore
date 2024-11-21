@@ -4,12 +4,12 @@ workflow ReadAnalysis {
     input {
         File read_file
         File? reference_genome
-        String? aligner = "minimap2"
+        String aligner = "minimap2"
         File? genome_alignment
         String output_prefix = "training"
         Boolean detect_chimeric = false
         Boolean analyze_homopolymer = false
-        Int? min_homopolymer_length = 5
+        Int min_homopolymer_length = 5
         Boolean analyze_fastq = false
         Boolean disable_model_fit = false
         Int num_threads = 1
@@ -31,7 +31,7 @@ workflow ReadAnalysis {
     }
 
     output {
-        File profiles = AnalyzeReads.profiles
+        Array[File] profiles = AnalyzeReads.profiles
     }
 }
 
@@ -52,22 +52,23 @@ task AnalyzeReads {
     }
 
     command <<<
+      set -x
         read_analysis.py genome \
             -i ~{read_file} \
             ~{if defined(reference_genome) then "-rg " + reference_genome else ""} \
             ~{if defined(aligner) then "-a " + aligner else ""} \
             ~{if defined(genome_alignment) then "-ga " + genome_alignment else ""} \
-            -o ~{output_prefix} \
-            ~{if detect_chimeric then "-c" else ""} \
-            ~{if analyze_homopolymer then "-hp" else ""} \
             ~{if defined(min_homopolymer_length) then "--min_homopolymer_len " + min_homopolymer_length else ""} \
             ~{if analyze_fastq then "--fastq" else ""} \
+            ~{if detect_chimeric then "-c" else ""} \
+            ~{if analyze_homopolymer then "-hp" else ""} \
             ~{if disable_model_fit then "--no_model_fit" else ""} \
+            -o ~{output_prefix} \
             -t ~{num_threads}
     >>>
 
     output {
-        File profiles = "~{output_prefix}.profile"
+        Array[File] profiles = glob("~{output_prefix}_*")
     }
 
     runtime {

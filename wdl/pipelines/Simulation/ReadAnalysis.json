@@ -5,10 +5,9 @@
   "ReadAnalysis.analyze_homopolymer": false,
   "ReadAnalysis.detect_chimeric": false,
   "ReadAnalysis.disable_model_fit": false,
-  "ReadAnalysis.genome_alignment": "File? (optional)",
   "ReadAnalysis.min_homopolymer_length": 5,
   "ReadAnalysis.num_threads": 24,
   "ReadAnalysis.output_prefix": "training",
-  "ReadAnalysis.read_file": "File",
-  "ReadAnalysis.reference_genome": 
+    "ReadAnalysis.read_file": "/home/dbest/Analysis/tests/nanosim/S_aureus_JKD6159_ONT_R10.4_guppy_v6.1.7_2percent.fastq.gz",
+  "ReadAnalysis.reference_genome": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta"
 }
