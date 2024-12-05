@@ -40,7 +40,8 @@ doc_ReadAnalysis:
 
 # about 8 min per sample
 run_ReadAnalysis:
-	time miniwdl run --debug --dir test-ReadAnalysis --cfg ../../../miniwdl_production.cfg --input ReadAnalysis.json ReadAnalysis.wdl
+	#time miniwdl run --debug --dir test-ReadAnalysis --cfg ../../../miniwdl_production.cfg --input ReadAnalysis.json ReadAnalysis.wdl
+	time miniwdl run --debug --dir test-ReadAnalysis --cfg ../../../miniwdl_production.cfg --input ReadAnalysis_Cbaratii.json ReadAnalysis.wdl
 
 run_ReadAnalysis_cromwell:
 	time java -jar ~/Software/cromwell-86.jar run ReadAnalysis.wdl -i ReadAnalysis.json
