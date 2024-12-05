@@ -31,7 +31,8 @@ workflow ReadAnalysis {
     }
 
     output {
-        Array[File] profiles = AnalyzeReads.profiles
+      Array[File] profiles = AnalyzeReads.profiles
+      File model = AnalyzeReads.model
     }
 }
 
@@ -53,22 +54,25 @@ task AnalyzeReads {
 
     command <<<
       set -x
-        read_analysis.py genome \
-            -i ~{read_file} \
-            ~{if defined(reference_genome) then "-rg " + reference_genome else ""} \
-            ~{if defined(aligner) then "-a " + aligner else ""} \
-            ~{if defined(genome_alignment) then "-ga " + genome_alignment else ""} \
-            ~{if defined(min_homopolymer_length) then "--min_homopolymer_len " + min_homopolymer_length else ""} \
-            ~{if analyze_fastq then "--fastq" else ""} \
-            ~{if detect_chimeric then "-c" else ""} \
-            ~{if analyze_homopolymer then "-hp" else ""} \
-            ~{if disable_model_fit then "--no_model_fit" else ""} \
-            -o ~{output_prefix} \
-            -t ~{num_threads}
+      read_analysis.py genome \
+      -i ~{read_file} \
+      ~{if defined(reference_genome) then "-rg " + reference_genome else ""} \
+      ~{if defined(aligner) then "-a " + aligner else ""} \
+      ~{if defined(genome_alignment) then "-ga " + genome_alignment else ""} \
+      ~{if defined(min_homopolymer_length) then "--min_homopolymer_len " + min_homopolymer_length else ""} \
+      ~{if analyze_fastq then "--fastq" else ""} \
+      ~{if detect_chimeric then "-c" else ""} \
+      ~{if analyze_homopolymer then "-hp" else ""} \
+      ~{if disable_model_fit then "--no_model_fit" else ""} \
+      -o ~{output_prefix} \
+      -t ~{num_threads}
+      find . -name "~{output_prefix}_*" | tar -cvf model.tar -T -
+      gzip model.tar
     >>>
-
+    
     output {
-        Array[File] profiles = glob("~{output_prefix}_*")
+      Array[File] profiles = glob("~{output_prefix}_*")
+      File model = "model.tar.gz"
     }
 
     runtime {
