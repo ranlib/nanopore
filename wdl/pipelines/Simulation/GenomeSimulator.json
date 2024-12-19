@@ -5,15 +5,15 @@
     "GenomeSimulator.dna_type": "circular",
     "GenomeSimulator.fastq": true,
     "GenomeSimulator.max_length": 100000,
-    "GenomeSimulator.median_length": 12000,
-    "GenomeSimulator.min_length": 500,
-    "GenomeSimulator.model": "/home/dbest/Analysis/nanopore/wdl/pipelines/Simulation/test-ReadAnalysis/20241121_161821_ReadAnalysis/out/model/model.tar.gz",
-    "GenomeSimulator.model_prefix": "training",
-    "GenomeSimulator.num_threads": 48,
-    "GenomeSimulator.number_of_reads": 20000,
+    "GenomeSimulator.median_length": 1000,
+    "GenomeSimulator.min_length": 100,
+    "GenomeSimulator.model": "/home/dbest/Analysis/nanopore/wdl/pipelines/Simulation/test-ReadAnalysis/20241219_112112_ReadAnalysis/out/model/model.tar.gz",
+    "GenomeSimulator.model_prefix": "training_CBaratii",
+    "GenomeSimulator.num_threads": 24,
+    "GenomeSimulator.number_of_reads": 200000,
     "GenomeSimulator.output_prefix": "simulated",
     "GenomeSimulator.perfect": false,
-    "GenomeSimulator.ref_genome": "/home/dbest//Analysis/nanopore/data/C_baratii/reference/NZ_CP014204.2.fa",
+    "GenomeSimulator.ref_genome": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic_split_files/GCA_000789395.1_ASM78939v1_genomic_1.fasta",
     "GenomeSimulator.seed": 12345,
-    "GenomeSimulator.standard_deviation": 1000
+    "GenomeSimulator.standard_deviation": 1
 }
