@@ -45,7 +45,9 @@ workflow GenomeSimulator {
   }
   
   output {
-    File simulated_reads = SimulateReads.simulated_reads
+    File simulated_aligned_reads = SimulateReads.simulated_aligned_reads
+    File simulated_unaligned_reads = SimulateReads.simulated_unaligned_reads
+    File simulated_aligned_error_profile = SimulateReads.simulated_aligned_error_profile
   }
 }
 
@@ -94,10 +96,15 @@ task SimulateReads {
     ~{if fastq then "--fastq" else ""} \
     ~{if chimeric then "--chimeric" else ""} \
     -t ~{num_threads}
+    gzip "~{output_prefix}_aligned_reads.fastq"
+    gzip "~{output_prefix}_unaligned_reads.fastq"
+    gzip "~{output_prefix}_aligned_error_profile"
   >>>
   
   output {
-    File simulated_reads = "~{output_prefix}.fastq" # if fastq else "~{output_prefix}.fasta"
+    File simulated_aligned_reads = "~{output_prefix}_aligned_reads.fastq.gz"
+    File simulated_unaligned_reads = "~{output_prefix}_unaligned_reads.fastq.gz"
+    File simulated_aligned_error_profile = "~{output_prefix}_aligned_error_profile.gz"
   }
   
   runtime {
