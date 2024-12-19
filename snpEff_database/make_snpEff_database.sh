@@ -11,9 +11,10 @@ cp ../data/C_baratii/reference/$ORG.gb data/$ORG/genes.gbk
 echo "${ORG}.genome: ${ORG}" >> snpEff.config
 snpEff build -c snpEff.config -genbank -v $ORG
 
-ORG=GCA_000789395.1_ASM78939v1_genomic
+ORG=CP006905.1
+ORGFILE=../data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic.gb
 mkdir -p data/$ORG
-cp ../data/C_baratii/reference/$ORG.gb data/$ORG/genes.gbk
+cp $ORGFILE data/$ORG/genes.gbk
 echo "${ORG}.genome: ${ORG}" >> snpEff.config
 snpEff build -c snpEff.config -genbank -v $ORG
 
