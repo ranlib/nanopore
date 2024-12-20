@@ -8,7 +8,7 @@
     "MutationSimulator.duplicationBlock": 1,
     "MutationSimulator.duplicationMaxLength": 2,
     "MutationSimulator.duplicationMinLength": 1,
-    "MutationSimulator.infile": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic.fna",
+    "MutationSimulator.infile": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic_split_files/GCA_000789395.1_ASM78939v1_genomic_1.fasta",
     "MutationSimulator.insert": 0.0002,
     "MutationSimulator.insertBlock": 1,
     "MutationSimulator.insertMaxLength": 50,
