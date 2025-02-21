@@ -1,0 +1,7 @@
+{
+    "ont_dorado.Basecall.disk_gb": 10,
+    "ont_dorado.basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.0.0",
+    "ont_dorado.fast5_archive": "/home/dbest/Analysis/tests/dorado/data_dir/FBA58087_skip_e5ccb8ec_bd593bb6_52.pod5",
+    "ont_dorado.sample_id": "test"
+}
+
