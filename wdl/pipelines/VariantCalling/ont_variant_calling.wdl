@@ -81,52 +81,52 @@ workflow ont_variant_calling {
       ref_fasta         = reference,
       ref_fasta_fai     = reference_fai,
       ref_dict          = reference_dict,
-      prefix = sample_name,
-      call_svs = call_svs,
+      prefix            = sample_name,
+      call_svs          = call_svs,
       call_small_variants = call_small_variants,
-      sites_vcf = sites_vcf,
-      sites_vcf_tbi = sites_vcf_tbi,
+      sites_vcf         = sites_vcf,
+      sites_vcf_tbi     = sites_vcf_tbi
     }
 
     if ( call_snpEff ) {
       # Clair3
       String annotated_clair_vcf = sample_name + "_clair_snpEff.vcf"
       call snpEff.task_snpEff as annotate_clair_vcf {
-	input:
-	vcf = select_first([CallVariantsONT.clair_vcf]),
-	genome = genome,
-	config = config,
-	dataDir = dataDir,
-	outputPath = annotated_clair_vcf
+        input:
+        vcf = select_first([CallVariantsONT.clair_vcf]),
+        genome = genome,
+        config = config,
+        dataDir = dataDir,
+        outputPath = annotated_clair_vcf
       }
 
       call VariantUtils.ZipAndIndexVCF as ZipAndIndexClairVCF {
-	input:
-	vcf = annotate_clair_vcf.outputVcf
+        input:
+        vcf = annotate_clair_vcf.outputVcf
       }
 
       # Sniffles
       String annotated_sniffles_vcf = sample_name + "_sniffles_snpEff.vcf"
       call snpEff.task_snpEff as annotate_sniffles_vcf {
-	input:
-	vcf = select_first([CallVariantsONT.sniffles_vcf]),
-	genome = genome,
-	config = config,
-	dataDir = dataDir,
-	outputPath = annotated_sniffles_vcf
+        input:
+        vcf = select_first([CallVariantsONT.sniffles_vcf]),
+        genome = genome,
+        config = config,
+        dataDir = dataDir,
+        outputPath = annotated_sniffles_vcf
       }
 
       call VariantUtils.ZipAndIndexVCF as ZipAndIndexSnifflesVCF {
-	input:
-	vcf = annotate_sniffles_vcf.outputVcf
+        input:
+        vcf = annotate_sniffles_vcf.outputVcf
       }
 
       # merge
       call VariantUtils.MergeAndSortVCFs {
-	input:
-	prefix = sample_name,
-	vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
-	ref_fasta_fai = reference_fai
+        input:
+        prefix = sample_name,
+        vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
+        ref_fasta_fai = reference_fai
       }
     }
   }
