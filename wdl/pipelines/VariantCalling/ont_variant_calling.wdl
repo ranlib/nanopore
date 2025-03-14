@@ -37,7 +37,7 @@ workflow ont_variant_calling {
     String sample_name
     
     Boolean call_svs = true
-    
+
     Boolean call_small_variants = true
     File? sites_vcf
     File? sites_vcf_tbi
