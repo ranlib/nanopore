@@ -226,3 +226,110 @@ task Index {
         docker:                 select_first([runtime_attr.docker,            default_attr.docker])
     }
 }
+
+task Dict {
+    meta {
+        description : "samtools dict a fasta file."
+    }
+
+    parameter_meta {
+        reference: "Reference fasta file for which dictionary is to be created."
+        runtime_attr_override: "Override the default runtime attributes."
+    }
+
+    input {
+        File reference
+        RuntimeAttr? runtime_attr_override
+
+        String docker = "dbest/samtools:v1.21"
+        String memory = "8GB"
+    }
+
+    String outputFile = basename(reference)
+    String reference_dict = sub(sub(outputFile,".fasta",".dict"),".fa",".dict")
+    String reference_fai = outputFile + ".fai"
+
+    Int disk_size = 1 + 2*ceil(size(reference, "GB"))
+
+    command <<<
+        ln -s ~{reference} ~{outputFile}
+        samtools dict ~{outputFile}
+    >>>
+
+    output {
+        File dict = reference_dict
+    }
+
+    RuntimeAttr default_attr = object {
+        cpu_cores:          2,
+        mem_gb:             4,
+        disk_gb:            disk_size,
+        boot_disk_gb:       10,
+        preemptible_tries:  1,
+        max_retries:        1,
+        docker:             "dbest/samtools:v1.21"
+    }
+    RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
+    runtime {
+        cpu:                    select_first([runtime_attr.cpu_cores,         default_attr.cpu_cores])
+        memory:                 select_first([runtime_attr.mem_gb,            default_attr.mem_gb]) + " GiB"
+        disks: "local-disk " +  select_first([runtime_attr.disk_gb,           default_attr.disk_gb]) + " SSD"
+        bootDiskSizeGb:         select_first([runtime_attr.boot_disk_gb,      default_attr.boot_disk_gb])
+        preemptible:            select_first([runtime_attr.preemptible_tries, default_attr.preemptible_tries])
+        maxRetries:             select_first([runtime_attr.max_retries,       default_attr.max_retries])
+        docker:                 select_first([runtime_attr.docker,            default_attr.docker])
+    }
+}
+
+task Faidx {
+    meta {
+        description : "samtools faidx a fasta file."
+    }
+
+    parameter_meta {
+        reference: "Reference fasta file for which dictionary is to be created."
+        runtime_attr_override: "Override the default runtime attributes."
+    }
+
+    input {
+        File reference
+        RuntimeAttr? runtime_attr_override
+        String docker = "dbest/samtools:v1.21"
+        String memory = "8GB"
+    }
+
+    String outputFile = basename(reference)
+    String reference_dict = sub(sub(outputFile,".fasta",".dict"),".fa",".dict")
+    String reference_fai = outputFile + ".fai"
+
+    Int disk_size = 1 + 2*ceil(size(reference, "GB"))
+
+    command <<<
+        ln -s ~{reference} ~{outputFile}
+        samtools faidx ~{outputFile}
+    >>>
+
+    output {
+        File fai = reference_fai
+    }
+
+    RuntimeAttr default_attr = object {
+        cpu_cores:          2,
+        mem_gb:             4,
+        disk_gb:            disk_size,
+        boot_disk_gb:       10,
+        preemptible_tries:  1,
+        max_retries:        1,
+        docker:             "dbest/samtools:v1.21"
+    }
+    RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
+    runtime {
+        cpu:                    select_first([runtime_attr.cpu_cores,         default_attr.cpu_cores])
+        memory:                 select_first([runtime_attr.mem_gb,            default_attr.mem_gb]) + " GiB"
+        disks: "local-disk " +  select_first([runtime_attr.disk_gb,           default_attr.disk_gb]) + " SSD"
+        bootDiskSizeGb:         select_first([runtime_attr.boot_disk_gb,      default_attr.boot_disk_gb])
+        preemptible:            select_first([runtime_attr.preemptible_tries, default_attr.preemptible_tries])
+        maxRetries:             select_first([runtime_attr.max_retries,       default_attr.max_retries])
+        docker:                 select_first([runtime_attr.docker,            default_attr.docker])
+    }
+}

@@ -1,5 +1,6 @@
 version 1.0
 
+import "../../tasks/Alignment/AlignReads.wdl" as Align
 import "../../tasks/Utilities/Utils.wdl" as Utils
 import "../../tasks/Utilities/VariantUtils.wdl"as VariantUtils
 import "../../tasks/VariantCalling/CallVariantsONT.wdl" as VAR
@@ -9,26 +10,24 @@ import "../../pipelines/Annotation/task_snpEff.wdl" as snpEff
 workflow ont_variant_calling {
   
   meta {
-    description: "A workflow that performs single sample variant calling on Oxford Nanopore reads from one or more flow cells. The workflow merges multiple flowcells into a single BAM prior to variant calling."
+    description: "Perform alignment and variant calling."
   }
   
   parameter_meta {
-    aligned_bams: "path to aligned BAM files"
-    aligned_bais: "path to aligned BAM file indices"
-    reference:    "reference sequence"
-    sample_name:  "name of the sample"
-    call_svs:     "whether to call SVs"
-    call_small_variants: "whether to call small variants"
-    sites_vcf:     "for use with Clair"
-    sites_vcf_tbi: "for use with Clair"
-    dataDir: "zip file of snpEff data directory"
-    config: "snpEff config file"
-    genome: "name of genome to be used"
+    reads: { description: "list of input single end fastq files" }
+    ref_fasta: { description: "reference sequence"}
+    prefix: { description: "prefix for output files"}
   }
   
   input {
-    Array[File]+ aligned_bams
-    Array[File]+ aligned_bais
+    Array[File]+ reads
+    #File ref_fasta
+    String RG
+    String map_preset
+    String? library
+    Array[String] tags_to_preserve = []
+    #String prefix = "out"
+    RuntimeAttr? runtime_attr_override
 
     File reference
     File reference_fai
@@ -37,7 +36,7 @@ workflow ont_variant_calling {
     String sample_name
     
     Boolean call_svs = true
-
+    
     Boolean call_small_variants = true
     File? sites_vcf
     File? sites_vcf_tbi
@@ -47,40 +46,45 @@ workflow ont_variant_calling {
     File config
     String genome
   }
-  
-  if (length(aligned_bams) > 1) {
-    call Utils.MergeBams as MergeAllReads { input: bams = aligned_bams, prefix = sample_name }
+ 
+  call Align.Minimap2 {
+    input:
+    reads = reads,
+    ref_fasta = reference,
+    RG = RG,
+    map_preset = map_preset,
+    library = library,
+    tags_to_preserve = tags_to_preserve,
+    prefix = sample_name,
+    runtime_attr_override = runtime_attr_override
   }
-  
-  File bam = select_first([MergeAllReads.merged_bam, aligned_bams[0]])
-  File bai = select_first([MergeAllReads.merged_bai, aligned_bais[0]])
-  
-  #if (bams_suspected_to_contain_dup_record) {
-  #  call Utils.DeduplicateBam as RemoveDuplicates {
-  #    input: aligned_bam = bam, aligned_bai = bai
-  #  }
-  #}
-  #File usable_bam = select_first([RemoveDuplicates.corrected_bam, bam])
-  #File usable_bai = select_first([RemoveDuplicates.corrected_bai, bai])
-  File usable_bam = bam
-  File usable_bai = bai
-  
+   
   call COV.SampleLevelAlignedMetrics as coverage {
     input:
-    aligned_bam = usable_bam,
-    aligned_bai = usable_bai,
+    aligned_bam = Minimap2.aligned_bam,
+    aligned_bai = Minimap2.aligned_bai,
     ref_fasta   = reference
   }
   
   if (call_svs || call_small_variants) {
+    call Utils.Faidx
+      input:
+      fasta = reference
+    }
+
+    call Utils.Dict
+      input:
+      fasta = reference
+    }
+  
     call VAR.CallVariantsONT {
       input:
-      bam               = usable_bam,
-      bai               = usable_bai,
+      bam               = Minimap2.aligned_bam,
+      bai               = Minimap2.aligned_bai,
       sample_id         = sample_name,
       ref_fasta         = reference,
-      ref_fasta_fai     = reference_fai,
-      ref_dict          = reference_dict,
+      ref_fasta_fai     = Faidx.fai,
+      ref_dict          = Dict.dict,
       prefix            = sample_name,
       call_svs          = call_svs,
       call_small_variants = call_small_variants,
@@ -92,7 +96,7 @@ workflow ont_variant_calling {
       # Clair3
       String annotated_clair_vcf = sample_name + "_clair_snpEff.vcf"
       call snpEff.task_snpEff as annotate_clair_vcf {
-        input:
+	      input:
         vcf = select_first([CallVariantsONT.clair_vcf]),
         genome = genome,
         config = config,
@@ -126,12 +130,15 @@ workflow ont_variant_calling {
         input:
         prefix = sample_name,
         vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
-        ref_fasta_fai = reference_fai
+      	ref_fasta_fai = reference_fai
       }
     }
   }
     
   output {
+    File aligned_bam = Minimap2.aligned_bam
+    File aligned_bai = Minimap2.aligned_bai
+
     Float aligned_num_reads = coverage.aligned_num_reads
     Float aligned_num_bases = coverage.aligned_num_bases
     Float aligned_frac_bases = coverage.aligned_frac_bases
