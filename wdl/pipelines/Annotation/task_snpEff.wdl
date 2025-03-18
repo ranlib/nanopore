@@ -16,7 +16,7 @@ task task_snpEff {
       String stats = "snpEff_summary.html"
       String csvStats = "snpEff_summary.csv"
       String memory = "9G"
-      String docker = "dbest/snpeff:v5.2e"
+      String docker = "dbest/snpeff:v5.2f"
     }
     
     command <<<
