@@ -51,20 +51,24 @@ task Assemble {
   command <<<
     set -euxo pipefail
     
-    num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
-
+    if [[ runtime_attr.cpu_cores == 0 ]] ; then
+      num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
+    else
+      num_core=~{runtime_attr.cpu_cores}
+    fi  
+    
     read_arg="--nano-raw"
     if [[ ~{read_type} == "nano-raw" ]]; then
-    read_arg="--nano-raw"
+      read_arg="--nano-raw"
     elif [[ ~{read_type} == "nano-corr" ]]; then
-    read_arg="--nano-corr"
+      read_arg="--nano-corr"
     elif [[ ~{read_type} == "nano-hq" ]]; then
-    read_arg="--nano-hq"
+      read_arg="--nano-hq"
     else
-    read_arg="--nano-raw"
+      read_arg="--nano-raw"
     fi
     
-    flye ${read_arg} ~{reads} --threads $num_core --out-dir asm
+    flye ${read_arg} ~{reads} --threads ${num_core} --out-dir asm
     
     mv asm/assembly.fasta ~{prefix}.flye.fa
     mv asm/assembly_graph.gfa ~{prefix}.flye.gfa
@@ -82,7 +86,7 @@ task Assemble {
     boot_disk_gb:       10,
     preemptible_tries:  0,
     max_retries:        0,
-    docker:             "dbest/flye:v2.9.3"
+    docker:             "dbest/flye:v2.9.5"
   }
 
   RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])

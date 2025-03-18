@@ -1,7 +1,7 @@
 {
   "Flye.Assemble.runtime_attr_override": {
     "boot_disk_gb": 10,
-    "cpu_cores": 2,
+    "cpu_cores": 24,
     "disk_gb": 10,
     "docker": "dbest/flye:v2.9.5",
     "max_retries": 1,
