@@ -27,8 +27,14 @@ task Raven {
   Int disk_size = 10 * ceil(size(sequences, "GB"))
 
   command <<<
-    set -ex
-    num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
+    set -euxo pipefail
+
+    if [[ runtime_attr.cpu_cores == 0 ]] ; then
+      num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
+    else
+      num_core=~{runtime_attr.cpu_cores}
+    fi  
+    
     raven \
     --kmer-len ~{kmer_len} \
     --window-len ~{window_len} \

@@ -1,18 +1,26 @@
 {
-    "raven_workflow.frequency": 0.001,
-    "raven_workflow.polishing_rounds": 2,
-    "raven_workflow.window_len": 5,
-    "raven_workflow.min_unitig_size": 9999,
-    "raven_workflow.sequences": "/home/dbest/Analysis/nanopore/data/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz",
-    "raven_workflow.gap": -4,
-    "raven_workflow.resume": false,
-    "raven_workflow.identity": 0.0,
-    "raven_workflow.disable_checkpoints": false,
-    "raven_workflow.mismatch": -5,
-    "raven_workflow.use_micromizers": false,
-    "raven_workflow.kMaxNumOverlaps": 32,
-    "raven_workflow.match": 3,
-    "raven_workflow.kmer_len": 15,
-    "raven_workflow.graphical_fragment_assembly": "raven.gfa"
+  "raven_workflow.Raven.runtime_attr_override": {
+    "boot_disk_gb": 10,
+    "cpu_cores": 24,
+    "disk_gb": 10,
+    "docker": "dbest/raven:v1.8.3",
+    "max_retries": 1,
+    "mem_gb": 100,
+    "preemptible_tries": 1
+  },
+  "raven_workflow.disable_checkpoints": false,
+  "raven_workflow.frequency": 0.001,
+  "raven_workflow.gap": -4,
+  "raven_workflow.graphical_fragment_assembly": "raven.gfa",
+  "raven_workflow.identity": 0,
+  "raven_workflow.kMaxNumOverlaps": 32,
+  "raven_workflow.kmer_len": 15,
+  "raven_workflow.match": 3,
+  "raven_workflow.min_unitig_size": 9999,
+  "raven_workflow.mismatch": -5,
+  "raven_workflow.polishing_rounds": 2,
+  "raven_workflow.resume": false,
+  "raven_workflow.sequences": "/home/dbest/Analysis/nanopore/data/Fastq/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz",
+  "raven_workflow.use_micromizers": false,
+  "raven_workflow.window_len": 5
 }
-
