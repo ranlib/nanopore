@@ -1,0 +1,3 @@
+@HD	VN:1.0	SO:unsorted
+@SQ	SN:chromosome	LN:2818670	M5:f9477cb5769007c468df8f144f1f89e5	UR:file:///home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta
+@SQ	SN:plasmid	LN:20730	M5:b50d0a0c7587dceb5e9e0e45e027a1e4	UR:file:///home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta
