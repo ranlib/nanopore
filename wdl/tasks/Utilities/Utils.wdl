@@ -240,20 +240,16 @@ task Dict {
     input {
         File reference
         RuntimeAttr? runtime_attr_override
-
-        String docker = "dbest/samtools:v1.21"
-        String memory = "8GB"
     }
 
     String outputFile = basename(reference)
     String reference_dict = sub(sub(outputFile,".fasta",".dict"),".fa",".dict")
-    String reference_fai = outputFile + ".fai"
-
+    
     Int disk_size = 1 + 2*ceil(size(reference, "GB"))
 
     command <<<
         ln -s ~{reference} ~{outputFile}
-        samtools dict ~{outputFile}
+    samtools dict -o ~{reference_dict} ~{outputFile}
     >>>
 
     output {
@@ -294,19 +290,16 @@ task Faidx {
     input {
         File reference
         RuntimeAttr? runtime_attr_override
-        String docker = "dbest/samtools:v1.21"
-        String memory = "8GB"
     }
 
     String outputFile = basename(reference)
-    String reference_dict = sub(sub(outputFile,".fasta",".dict"),".fa",".dict")
     String reference_fai = outputFile + ".fai"
 
     Int disk_size = 1 + 2*ceil(size(reference, "GB"))
 
     command <<<
         ln -s ~{reference} ~{outputFile}
-        samtools faidx ~{outputFile}
+        samtools faidx -o ~{reference_fai} ~{outputFile}
     >>>
 
     output {
