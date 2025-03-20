@@ -7,7 +7,7 @@ import "../../tasks/VariantCalling/CallVariantsONT.wdl" as VAR
 import "../../tasks/QC/SampleLevelAlignedMetrics.wdl" as COV
 import "../../pipelines/Annotation/task_snpEff.wdl" as snpEff
 
-workflow ont_variant_calling {
+workflow ont_alignment_and_variant_calling {
   
   meta {
     description: "Perform alignment and variant calling."
@@ -30,8 +30,6 @@ workflow ont_variant_calling {
     RuntimeAttr? runtime_attr_override
 
     File reference
-    File reference_fai
-    File reference_dict
     
     String sample_name
     
@@ -67,14 +65,14 @@ workflow ont_variant_calling {
   }
   
   if (call_svs || call_small_variants) {
-    call Utils.Faidx
+    call Utils.Faidx {
       input:
-      fasta = reference
+      reference = reference
     }
 
-    call Utils.Dict
+    call Utils.Dict { 
       input:
-      fasta = reference
+      reference = reference
     }
   
     call VAR.CallVariantsONT {
@@ -130,7 +128,7 @@ workflow ont_variant_calling {
         input:
         prefix = sample_name,
         vcfs = [ annotate_clair_vcf.outputVcf, annotate_sniffles_vcf.outputVcf ],
-      	ref_fasta_fai = reference_fai
+      	ref_fasta_fai = Faidx.fai
       }
     }
   }
