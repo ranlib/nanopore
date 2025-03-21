@@ -44,5 +44,8 @@ doc_ont_alignment_and_variant_calling:
 run_ont_alignment_and_variant_calling:
 	miniwdl run --debug --dir test-ont_alignment_and_variant_calling --cfg ../../../miniwdl_production.cfg --input ont_alignment_and_variant_calling.json ont_alignment_and_variant_calling.wdl
 
+run_ont_alignment_and_variant_calling_Cbaratii:
+	miniwdl run --debug --dir test-ont_alignment_and_variant_calling --cfg ../../../miniwdl_production.cfg --input ont_alignment_and_variant_calling_Cbaratii.json ont_alignment_and_variant_calling.wdl
+
 run_ont_alignment_and_variant_calling_cromwell:
 	cromwell run ont_alignment_and_variant_calling.wdl -i ont_alignment_and_variant_calling.json
