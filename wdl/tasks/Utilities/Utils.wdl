@@ -243,13 +243,14 @@ task Dict {
     }
 
     String outputFile = basename(reference)
-    String reference_dict = sub(sub(outputFile,".fasta",".dict"),".fa",".dict")
+    String reference_dict = outputFile + ".dict"
     
     Int disk_size = 1 + 2*ceil(size(reference, "GB"))
 
     command <<<
-        ln -s ~{reference} ~{outputFile}
-    samtools dict -o ~{reference_dict} ~{outputFile}
+      set -euxo pipefail
+      ln -s ~{reference} ~{outputFile}
+      samtools dict -o ~{reference_dict} ~{outputFile}
     >>>
 
     output {
@@ -298,8 +299,9 @@ task Faidx {
     Int disk_size = 1 + 2*ceil(size(reference, "GB"))
 
     command <<<
-        ln -s ~{reference} ~{outputFile}
-        samtools faidx -o ~{reference_fai} ~{outputFile}
+      set -euxo pipefail
+      ln -s ~{reference} ~{outputFile}
+      samtools faidx -o ~{reference_fai} ~{outputFile}
     >>>
 
     output {
