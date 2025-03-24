@@ -134,9 +134,11 @@ workflow ont_alignment_and_variant_calling {
   }
     
   output {
+    # alignemnt
     File aligned_bam = Minimap2.aligned_bam
     File aligned_bai = Minimap2.aligned_bai
 
+    # alignment metrics
     Float aligned_num_reads = coverage.aligned_num_reads
     Float aligned_num_bases = coverage.aligned_num_bases
     Float aligned_frac_bases = coverage.aligned_frac_bases
@@ -150,9 +152,15 @@ workflow ont_alignment_and_variant_calling {
     Float average_identity = coverage.average_identity
     Float median_identity = coverage.median_identity
 
+    Map[String, Float] reads_stats = coverage.reads_stats
+    File stats = coverage.stats
+    File map = coverage.map
+    
+    # sniffles variant calling
     File? sniffles_vcf = CallVariantsONT.sniffles_vcf
     File? sniffles_tbi = CallVariantsONT.sniffles_tbi
     
+    # clair variant calling
     File? clair_vcf = CallVariantsONT.clair_vcf
     File? clair_tbi = CallVariantsONT.clair_tbi
     
