@@ -8,13 +8,14 @@ task Hifiasm {
         Boolean use_ont = false  # Whether to use Oxford Nanopore preset
     }
 
-    command {
-        hifiasm \
-        -o ~{output_prefix} \
-        -t ~{threads} \
-        ~{if use_ont then "--ont" else ""} \
-        ~{sep=" " reads}
-    }
+    command <<<
+      set -euxo pipefail
+      hifiasm \
+      -o ~{output_prefix} \
+      -t ~{threads} \
+      ~{if use_ont then "--ont" else ""} \
+      ~{sep=" " reads}
+    >>>
 
     output {
         Array[File] assembly_files = glob("~{output_prefix}.*")

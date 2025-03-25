@@ -1,6 +1,6 @@
 {
   "Hifiasm_workflow.output_prefix": "hifiasm.asm",
-  "Hifiasm_workflow.reads": "Array[File]",
+  "Hifiasm_workflow.reads": ["/home/dbest/Analysis/nanopore/data/Fastq/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz"],
   "Hifiasm_workflow.threads": 1,
-  "Hifiasm_workflow.use_ont": false
+  "Hifiasm_workflow.use_ont": true
 }
