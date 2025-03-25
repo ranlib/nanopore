@@ -7,14 +7,14 @@
     "cpu_cores": 2
   },
   "ONT_assembly_with_flye.fastqs": [
-    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
-    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_1_0.fastq.gz",
-    "/home/dbest/Analysis/nanopore/data/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_2_0.fastq.gz"
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_1_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_2_0.fastq.gz"
   ],
   "ONT_assembly_with_flye.medaka_model": "r941_min_high_g360",
   "ONT_assembly_with_flye.n_rounds": 1,
   "ONT_assembly_with_flye.prefix": "test",
   "ONT_assembly_with_flye.read_type": "nano-raw",
-  "ONT_assembly_with_flye.reference": "/home/dbest/Analysis/nanopore/data/NZ_CP014204.2.fa",
+  "ONT_assembly_with_flye.reference": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic.fna",
   "ONT_assembly_with_flye.sample_name": "barcode01"
 }
