@@ -49,3 +49,20 @@ doc_Canu:
 run_Canu:
 	miniwdl run --debug --dir test-Canu --cfg ../../../miniwdl_production.cfg --input Canu.json Canu.wdl
 
+#
+# Hifiasm
+#
+Hifiasm:
+	womtool validate --inputs Hifiasm.json Hifiasm.wdl
+	miniwdl check Hifiasm.wdl
+
+doc_Hifiasm:
+	wdl-aid Hifiasm.wdl -o Hifiasm.md
+	womtool graph Hifiasm.wdl > Hifiasm.dot
+	dot -Tpdf -o Hifiasm.pdf Hifiasm.dot
+	dot -Tjpeg -o Hifiasm.jpeg Hifiasm.dot
+	rm Hifiasm.dot
+
+run_Hifiasm:
+	miniwdl run --debug --dir test-Hifiasm --cfg ../../../miniwdl_production.cfg --input Hifiasm.json Hifiasm.wdl
+

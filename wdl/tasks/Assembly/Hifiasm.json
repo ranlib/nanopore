@@ -1,0 +1,6 @@
+{
+  "Hifiasm_workflow.output_prefix": "hifiasm.asm",
+  "Hifiasm_workflow.reads": "Array[File]",
+  "Hifiasm_workflow.threads": 1,
+  "Hifiasm_workflow.use_ont": false
+}
