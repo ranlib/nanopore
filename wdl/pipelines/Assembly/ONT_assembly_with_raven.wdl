@@ -23,12 +23,15 @@ workflow ONT_assembly_with_raven {
   
   input {
     Array[File]+ fastqs
-    File reference
+    String graphical_fragment_assembly
+
     String medaka_model = "r941_min_high_g360"
+    Int n_rounds = 1
+
+    File reference
+
     String sample_name
     String prefix
-    String graphical_fragment_assembly
-    Int n_rounds = 1
   }
 
   call Utils.ComputeGenomeLength { input: fasta = reference }
