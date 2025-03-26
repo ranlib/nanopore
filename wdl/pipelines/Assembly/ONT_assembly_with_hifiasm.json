@@ -1,0 +1,41 @@
+{
+  "ONT_assembly_with_hifiasm.MedakaPolish.runtime_attr_override": {
+    "boot_disk_gb": 10,
+    "cpu_cores": 8,
+    "docker": "ontresearch/medaka:1.11.3",
+    "max_retries": 0,
+    "mem_gb": 24,
+    "preemptible_tries": 0
+  },
+  "ONT_assembly_with_hifiasm.MergeFastqs.prefix": "merged",
+  "ONT_assembly_with_hifiasm.MergeFastqs.runtime_attr_override": {
+    "boot_disk_gb": 10,
+    "cpu_cores": 1,
+    "docker": "dbest/samtools:v1.21",
+    "max_retries": 0,
+    "mem_gb": 1,
+    "preemptible_tries": 0
+  },
+  "ONT_assembly_with_hifiasm.Quast.is_large": false,
+  "ONT_assembly_with_hifiasm.Quast.runtime_attr_override": {
+    "boot_disk_gb": 10,
+    "cpu_cores": 16,
+    "docker": "dbest/quast:v5.2.0",
+    "max_retries": 0,
+    "mem_gb": 80,
+    "preemptible_tries": 0
+  },
+  "ONT_assembly_with_hifiasm.medaka_model": "r941_min_high_g360",
+  "ONT_assembly_with_hifiasm.n_rounds": 1,
+  "ONT_assembly_with_hifiasm.output_prefix": "hifiasm.asm",
+  "ONT_assembly_with_hifiasm.prefix": "barcode01",
+  "ONT_assembly_with_hifiasm.reads": [
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_1_0.fastq.gz",
+    "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_2_0.fastq.gz"
+  ],
+  "ONT_assembly_with_hifiasm.reference": "/home/dbest/Analysis/nanopore/data/C_baratii/reference/GCA_000789395.1_ASM78939v1_genomic.fna",
+  "ONT_assembly_with_hifiasm.sample_name": "barcode01",
+  "ONT_assembly_with_hifiasm.threads": 1,
+  "ONT_assembly_with_hifiasm.use_ont": true
+}
