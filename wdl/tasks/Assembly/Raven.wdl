@@ -29,7 +29,7 @@ task Raven {
   command <<<
     set -euxo pipefail
 
-    if [[ runtime_attr.cpu_cores == 0 ]] ; then
+    if [[ ~{runtime_attr.cpu_cores} == 0 ]] ; then
       num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
     else
       num_core=~{runtime_attr.cpu_cores}
