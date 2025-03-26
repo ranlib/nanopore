@@ -89,6 +89,7 @@ workflow ONT_assembly_with_hifiasm {
   output {
     # Hifiasm
     Array[File] assembly_files = Hifiasm.assembly_files
+    File assembly_fasta = gfa_to_fa.fa
     
     # Medaka polishing
     File polished_assembly = MedakaPolish.polished_assembly
