@@ -16,10 +16,11 @@ task Flye {
     }
 
     command <<<
+      set -euxo pipefail
         flye \
         ~{read_type} ~{sep=" " reads} \
         --out-dir ~{output_dir} \
-        --genome_size ~{genome_size} \
+        --genome-size ~{genome_size} \
         --threads ~{threads} \
         --iterations ~{iterations} \
         ~{if defined(min_overlap) then "-m " + min_overlap else ""} \
@@ -41,6 +42,16 @@ task Flye {
 }
 
 workflow FlyeWorkflow {
+  meta {
+    description: "Assemble a genome using Flye"
+  }
+  
+  parameter_meta {
+    reads: "Input reads (in fasta or fastq format, compressed or uncompressed)"
+    read_type: "Read type for running flye"
+    output_dir: "Name of output directory"
+  }
+
     input {
         Array[File]+ reads  # Input read files
         String read_type  # Read type flag
