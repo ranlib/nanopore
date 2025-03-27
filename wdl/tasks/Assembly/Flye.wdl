@@ -1,111 +1,87 @@
 version 1.0
 
-import "../../structs/Structs.wdl"
-
-workflow Flye {
-
-    meta {
-        description: "Assemble a genome using Flye"
-    }
-
-    parameter_meta {
-      reads: "Input reads (in fasta or fastq format, compressed or uncompressed)"
-      read_type: "read type for running flye"
-      prefix: "Prefix to apply to assembly output filenames"
-    }
-
+task Flye {
     input {
-      File reads
-      String prefix
-      String read_type = "nano-raw"
+        Array[File]+ reads  # Input read files (FASTA/FASTQ format, can be gzipped)
+        String read_type  # One of: "--pacbio-raw", "--pacbio-corr", "--pacbio-hifi", "--nano-raw", "--nano-corr", "--nano-hq"
+        String output_dir  # Path to output directory
+        String genome_size  # Estimated genome size (e.g., "5m", "2.6g")
+        Int threads = 1  # Number of threads
+        Int iterations = 1  # Number of polishing iterations
+        Int? min_overlap  # Minimum overlap between reads (optional)
+        Int? asm_coverage  # Reduced coverage for initial disjointig assembly (optional)
+        Boolean metagenome = false  # Metagenome mode
+        Boolean keep_haplotypes = false  # Keep alternative haplotypes
+        Float? read_error  # Adjust parameters for read error rate
     }
 
-    call Assemble {
-      input:
-      reads  = reads,
-      read_type = read_type,
-      prefix = prefix
-    }
+    command <<<
+      set -euxo pipefail
+        flye \
+        ~{read_type} ~{sep=" " reads} \
+        --out-dir ~{output_dir} \
+        --genome-size ~{genome_size} \
+        --threads ~{threads} \
+        --iterations ~{iterations} \
+        ~{if defined(min_overlap) then "-m " + min_overlap else ""} \
+        ~{if defined(asm_coverage) then "--asm-coverage " + asm_coverage else ""} \
+        ~{if metagenome then "--meta" else ""} \
+        ~{if keep_haplotypes then "--keep-haplotypes" else ""} \
+        ~{if defined(read_error) then "--read-error " + read_error else ""}
+    >>>
 
     output {
-      Array[File] assembly_files = Assemble.assembly_files
-      File gfa = Assemble.gfa
-      File fa = Assemble.fa
+        Array[File] assembly_files = glob("~{output_dir}/*")
+    }
+
+    runtime {
+        docker: "dbest/flye:v2.9.5"
+        cpu: threads
+        memory: "16G"
     }
 }
 
-task Assemble {
+workflow FlyeWorkflow {
+  meta {
+    description: "Assemble a genome using Flye"
+  }
+  
   parameter_meta {
-    reads:    "reads (in fasta or fastq format, compressed or uncompressed)"
-    prefix:   "prefix to apply to assembly output filenames"
-  }
-  
-  input {
-    File reads
-    String prefix = "out"
-    String read_type = "nano-raw"
-    Float? genome_length
-    RuntimeAttr? runtime_attr_override
-  }
-  
-  Int disk_size = 10 * ceil(size(reads, "GB"))
-  
-  RuntimeAttr default_attr = object {
-    cpu_cores:          16,
-    mem_gb:             100,
-    disk_gb:            disk_size,
-    boot_disk_gb:       10,
-    preemptible_tries:  0,
-    max_retries:        0,
-    docker:             "dbest/flye:v2.9.5"
+    reads: "Input reads (in fasta or fastq format, compressed or uncompressed)"
+    read_type: "Read type for running flye"
+    output_dir: "Name of output directory"
   }
 
-  RuntimeAttr runtime_attr = select_first([runtime_attr_override, default_attr])
-  runtime {
-    cpu:                    select_first([runtime_attr.cpu_cores,         default_attr.cpu_cores])
-    memory:                 select_first([runtime_attr.mem_gb,            default_attr.mem_gb]) + " GiB"
-    disks: "local-disk " +  select_first([runtime_attr.disk_gb,           default_attr.disk_gb]) + " HDD"
-    bootDiskSizeGb:         select_first([runtime_attr.boot_disk_gb,      default_attr.boot_disk_gb])
-    preemptible:            select_first([runtime_attr.preemptible_tries, default_attr.preemptible_tries])
-    maxRetries:             select_first([runtime_attr.max_retries,       default_attr.max_retries])
-    docker:                 select_first([runtime_attr.docker,            default_attr.docker])
-  }
+    input {
+        Array[File]+ reads  # Input read files
+        String read_type  # Read type flag
+        String output_dir  # Output directory
+        String genome_size  # Estimated genome size
+        Int threads = 1  # Number of threads
+        Int iterations = 1  # Number of polishing iterations
+        Int? min_overlap  # Minimum overlap between reads
+        Int? asm_coverage  # Reduced coverage for initial disjointig assembly
+        Boolean metagenome = false  # Metagenome mode
+        Boolean keep_haplotypes = false  # Keep alternative haplotypes
+        Float? read_error  # Read error rate adjustment
+    }
 
-  Int cpus = select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
-  Int genome_size = if defined(genome_length) then ceil(genome_length) else ""
-  
-  command <<<
-    set -euxo pipefail
-    
-    if [[ ~{cpus} ]] ; then
-      num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
-    else
-      num_core=~{runtime_attr.cpu_cores}
-    fi  
-    
-    read_arg="--nano-raw"
-    if [[ ~{read_type} == "nano-raw" ]]; then
-      read_arg="--nano-raw"
-    elif [[ ~{read_type} == "nano-corr" ]]; then
-      read_arg="--nano-corr"
-    elif [[ ~{read_type} == "nano-hq" ]]; then
-      read_arg="--nano-hq"
-    else
-      read_arg="--nano-raw"
-    fi
-    
-    flye ${read_arg} ~{reads} --threads ${num_core} \
-    ~{true="--genome_size" false="" defined(genome_length)} ~{genome_size} \
-    --out-dir asm
-    
-    mv asm/assembly.fasta ~{prefix}.flye.fa
-    mv asm/assembly_graph.gfa ~{prefix}.flye.gfa
-  >>>
-  
-  output {
-    Array[File] assembly_files = glob("asm/*")    
-    File gfa = "~{prefix}.flye.gfa"
-    File fa = "~{prefix}.flye.fa"
-  }
-  
+    call Flye {
+        input:
+            reads=reads,
+            read_type=read_type,
+            output_dir=output_dir,
+            genome_size=genome_size,
+            threads=threads,
+            iterations=iterations,
+            min_overlap=min_overlap,
+            asm_coverage=asm_coverage,
+            metagenome=metagenome,
+            keep_haplotypes=keep_haplotypes,
+            read_error=read_error
+    }
+
+    output {
+        Array[File] assembly_files = Flye.assembly_files
+    }
 }

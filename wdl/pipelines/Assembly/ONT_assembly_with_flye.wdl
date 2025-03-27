@@ -22,32 +22,51 @@ workflow ONT_assembly_with_flye {
   
   input {
     Array[File]+ fastqs
-    File reference
+
+    String read_type # One of: "--pacbio-raw", "--pacbio-corr", "--pacbio-hifi", "--nano-raw", "--nano-corr", "--nano-hq"
+    Int threads = 1  # Number of threads
+    Int iterations = 1  # Number of polishing iterations
+    Int? min_overlap  # Minimum overlap between reads
+    Int? asm_coverage  # Reduced coverage for initial disjointig assembly
+    Boolean metagenome = false  # Metagenome mode
+    Boolean keep_haplotypes = false  # Keep alternative haplotypes
+    Float? read_error  # Read error rate adjustment
+
     String medaka_model = "r941_min_high_g360"
-    String sample_name
-    String read_type
-    String prefix
     Int n_rounds = 1
+
+    File reference
+
+    String sample_name
+    String prefix
   }
 
   call Utils.ComputeGenomeLength { input: fasta = reference }
 
   call Utils.MergeFastqs { input: fastqs = fastqs }
   
-  #  genome_size = ComputeGenomeLength.length,
   call Flye.Flye {
     input:
-    reads = MergeFastqs.merged_fastq,
+    reads = [ MergeFastqs.merged_fastq ],
     read_type = read_type,
-    prefix = prefix,
+    output_dir = prefix,
+    genome_size = ceil(ComputeGenomeLength.length),
+    threads = threads,
+    iterations = iterations,
+    min_overlap = min_overlap,
+    asm_coverage = asm_coverage,
+    metagenome = metagenome,
+    keep_haplotypes = keep_haplotypes,
+    read_error = read_error
+
   }
   
   call Medaka.MedakaPolish {
     input:
     basecalled_reads = MergeFastqs.merged_fastq,
-    draft_assembly = Flye.fa,
+    draft_assembly = Flye.assembly_files[0],
     model = medaka_model,
-    prefix = basename(Flye.fa, ".fasta") + ".consensus",
+    prefix = basename(Flye.assembly_files[0], ".fasta") + ".consensus",
     n_rounds = n_rounds
   }
   
@@ -70,9 +89,8 @@ workflow ONT_assembly_with_flye {
 
   output {
     # Flye
-    File assembly = Flye.fa
-    File gassembly = Flye.gfa
-
+    Array[File] assembly_files = Flye.assembly_files
+    
     # Medaka polishing
     File polished_assembly = MedakaPolish.polished_assembly
 

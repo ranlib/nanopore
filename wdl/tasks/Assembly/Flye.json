@@ -1,14 +1,12 @@
 {
-  "Flye.Assemble.runtime_attr_override": {
-    "boot_disk_gb": 10,
-    "cpu_cores": 24,
-    "disk_gb": 10,
-    "docker": "dbest/flye:v2.9.5",
-    "max_retries": 1,
-    "mem_gb": 100,
-    "preemptible_tries": 1
-  },
-  "Flye.prefix": "test",
-  "Flye.read_type": "nano-raw",
-  "Flye.reads": "/home/dbest/Analysis/nanopore/data/Fastq/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz"
+  "FlyeWorkflow.asm_coverage": 50,
+  "FlyeWorkflow.genome_size": "3m",
+    "FlyeWorkflow.iterations": 1,
+    "FlyeWorkflow.keep_haplotypes": false,
+    "FlyeWorkflow.metagenome": false,
+  "FlyeWorkflow.min_overlap": 1000,
+  "FlyeWorkflow.output_dir": "asm",
+  "FlyeWorkflow.read_type": "--nano-raw",
+    "FlyeWorkflow.reads": ["/home/dbest/Analysis/nanopore/data/Fastq/fastq_runid_ee16f061b4108ce0608af62a83c96d67e4fc2df9_0_0.fastq.gz"],
+  "FlyeWorkflow.threads": 16
 }
