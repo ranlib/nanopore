@@ -28,8 +28,9 @@ workflow Flye {
     }
 
     output {
-        File gfa = Assemble.gfa
-        File fa = Assemble.fa
+      Array[File] assembly_files = Assemble.assembly_files
+      File gfa = Assemble.gfa
+      File fa = Assemble.fa
     }
 }
 
@@ -43,6 +44,7 @@ task Assemble {
     File reads
     String prefix = "out"
     String read_type = "nano-raw"
+    Float? genome_length
     RuntimeAttr? runtime_attr_override
   }
   
@@ -69,10 +71,13 @@ task Assemble {
     docker:                 select_first([runtime_attr.docker,            default_attr.docker])
   }
 
+  Int cpus = select_first([runtime_attr.cpu_cores, default_attr.cpu_cores])
+  Int genome_size = if defined(genome_length) then ceil(genome_length) else ""
+  
   command <<<
     set -euxo pipefail
     
-    if [[ ~{runtime_attr.cpu_cores} == 0 ]] ; then
+    if [[ ~{cpus} ]] ; then
       num_core=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l)
     else
       num_core=~{runtime_attr.cpu_cores}
@@ -89,13 +94,16 @@ task Assemble {
       read_arg="--nano-raw"
     fi
     
-    flye ${read_arg} ~{reads} --threads ${num_core} --out-dir asm
+    flye ${read_arg} ~{reads} --threads ${num_core} \
+    ~{true="--genome_size" false="" defined(genome_length)} ~{genome_size} \
+    --out-dir asm
     
     mv asm/assembly.fasta ~{prefix}.flye.fa
     mv asm/assembly_graph.gfa ~{prefix}.flye.gfa
   >>>
   
   output {
+    Array[File] assembly_files = glob("asm/*")    
     File gfa = "~{prefix}.flye.gfa"
     File fa = "~{prefix}.flye.fa"
   }
