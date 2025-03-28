@@ -1,0 +1,16 @@
+{
+    "wf_centrifuge.read1": "/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_ONT_R10.4_guppy_v6.1.7_downsampled_100.fastq.gz",
+    "wf_centrifuge.task_centrifuge.docker": "dbest/centrifuge:v1.0.4",
+    "wf_centrifuge.task_kreport.docker": "dbest/centrifuge:v1.0.4",
+    "wf_centrifuge.indexFiles": [
+        "/home/dbest/data/centrifuge/hpvc.1.cf",
+        "/home/dbest/data/centrifuge/hpvc.2.cf",
+        "/home/dbest/data/centrifuge/hpvc.3.cf",
+        "/home/dbest/data/centrifuge/hpvc.4.cf"
+    ],
+    "wf_centrifuge.memory": "64GB",
+    "wf_centrifuge.disk_multiplier": 20,
+    "wf_centrifuge.disk_size": 100,
+    "wf_centrifuge.samplename": "S_aureus_JKD6159",
+    "wf_centrifuge.threads": 24
+}
