@@ -83,3 +83,20 @@ doc_bcftools_stats:
 run_bcftools_stats:
 	time miniwdl run --debug --dir test-bcftools_stats --cfg ../../../miniwdl_production.cfg --input wf_bcftools_stats.json wf_bcftools_stats.wdl
 
+#
+# centrifuge
+#
+centrifuge:
+	java -jar ~/Software/womtool-86.jar validate --inputs wf_centrifuge.json wf_centrifuge.wdl
+	miniwdl check wf_centrifuge.wdl
+
+doc_centrifuge:
+	wdl-aid wf_centrifuge.wdl -o wf_centrifuge.md
+	java -jar ~/Software/womtool-86.jar graph wf_centrifuge.wdl > wf_centrifuge.dot
+	dot -Tpdf -o wf_centrifuge.pdf wf_centrifuge.dot
+	dot -Tjpeg -o wf_centrifuge.jpeg wf_centrifuge.dot
+	rm wf_centrifuge.dot
+
+run_centrifuge:
+	time miniwdl run --debug --dir test-centrifuge --cfg ../../../miniwdl_production.cfg --input wf_centrifuge.json wf_centrifuge.wdl
+
