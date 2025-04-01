@@ -21,6 +21,7 @@ task Pilon {
     Int minmq = 0
     Int minqual = 0
     Float mindepth = 1
+    String docker = "dbest/pilon:v1.24"
   }
   
   command <<<
@@ -45,7 +46,10 @@ task Pilon {
   }
 
   runtime {
-    docker: "dbest/pilon:v1.24"
+    docker: docker
+    memory: "30G"
+    time_minutes: 60
+    cpu: 8  
   }
 }
 
