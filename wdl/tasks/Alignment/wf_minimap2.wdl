@@ -8,15 +8,27 @@ workflow wf_minimap2 {
     File reference
     File read1
     File read2
-    String outputPrefix
     String samplename
     Int threads = 1
-  }
+    String presetOption = "sr"
+    Boolean outputSam = true
+    Boolean addMDTagToSam = true
+    Boolean secondaryAlignment = false
+    Boolean softClippingForSupplementaryAlignments = true
+    Boolean writeLongCigar = true
+    Int? maxIntronLength
+    Int? maxFragmentLength
+    Int? retainMaxSecondaryAlignments
+    Int? matchingScore
+    Int? mismatchPenalty
+    String? howToFindGTAG
+    String dockerImage = "staphb/minimap2:2.25" 
+  } 
 
   call minimap2.Indexing {
     input:
     referenceFile = reference,
-    outputPrefix = outputPrefix,
+    outputPrefix = samplename,
     cores = threads
   }
   
