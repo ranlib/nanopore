@@ -1,0 +1,23 @@
+{
+    "polish_with_illumina.Pilon.nostrays": true,
+    "polish_with_illumina.Pilon.flank": 10,
+    "polish_with_illumina.Pilon.verbose": true,
+    "polish_with_illumina.Pilon.defaultqual": 10,
+    "polish_with_illumina.Pilon.nonpf": false,
+    "polish_with_illumina.RG": "",
+    "polish_with_illumina.tags_to_preserve": [],
+    "polish_with_illumina.Pilon.debug": true,
+    "polish_with_illumina.Pilon.mindepth": 1,
+    "polish_with_illumina.Pilon.minqual": 0,
+    "polish_with_illumina.ref_fasta": "/home/dbest/Analysis/nanopore/data/S_aureus/reference/S_aureus_JKD6159.fasta",
+    "polish_with_illumina.Pilon.output_prefix": "out",
+    "polish_with_illumina.Pilon.sort": true,
+    "polish_with_illumina.Pilon.gapmargin": 100000,
+    "polish_with_illumina.Pilon.mingap": 10,
+    "polish_with_illumina.Pilon.iupac": true,
+    "polish_with_illumina.Pilon.K": 47,
+    "polish_with_illumina.samplename": "S_aureus_JKD6159",
+    "polish_with_illumina.Pilon.minmq": 0,
+    "polish_with_illumina.map_preset": "sr",
+    "polish_with_illumina.reads": ["/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_Illumina_1.fastq.gz", "/home/dbest/Analysis/nanopore/data/S_aureus/reads/S_aureus_JKD6159_Illumina_2.fastq.gz"]
+}

@@ -10,22 +10,21 @@ workflow polish_with_illumina {
   }
   
   parameter_meta {
-    fastq: { description: "input fastq file" }
-    ref_map_file: { description: "reference sequence"}
-    medaka_model: { description: "Medaka polishing model name"}
+    reads: { description: "Array of input illumina fastq files." }
+    ref_fasta: { description: "Fasta file of sequence to be polished."}
+    RG: { description: "Read group for minimap2 mapper."}
     sample_name: { description: "name of the sample"}
     prefix: { description: "prefix for output files"}
-    n_rounds: { description: "number of medaka polishing rounds"}
+    map_preset: { description: "mapping preset for minimap2"}
+    library: { description: "library prep kit used for illumina sequencing"}
+    tags_to_preserve: { description: "tags to preserve in the output bam file"}
   }
   
   input {
     Array[File] reads
     File ref_fasta
-    String RG
-    String map_preset
-    String? library
-    Array[String] tags_to_preserve = []
-    String prefix = "out"
+    String samplename
+    Int threads = 64
   }
 
   call Minimap2.wf_minimap2 {
@@ -33,18 +32,18 @@ workflow polish_with_illumina {
     reference = ref_fasta,
     read1 = reads[0],
     read2 = reads[1],
-    outputPrefix = prefix,
-    samplename = "out",
-    threads = 64
+    samplename = samplename,
+    threads = threads
   }
   
   call Pilon.Pilon {
     input:
     genome_fasta = ref_fasta,
     frags_bam = wf_minimap2.bam,
-    frags_bai = wf_minimap2.bai
+    frags_bai = wf_minimap2.bai 
   }
 
+  
   output {
     File aligned_bam = wf_minimap2.bam
     File aligned_bai = wf_minimap2.bai
