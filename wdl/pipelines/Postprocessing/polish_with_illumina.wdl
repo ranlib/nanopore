@@ -26,7 +26,6 @@ workflow polish_with_illumina {
     String? library
     Array[String] tags_to_preserve = []
     String prefix = "out"
-    RuntimeAttr? runtime_attr_override
   }
 
   call Minimap2.wf_minimap2 {
