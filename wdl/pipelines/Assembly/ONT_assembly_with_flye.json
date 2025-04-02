@@ -23,7 +23,7 @@
     "docker": "dbest/quast:v5.2.0",
     "mem_gb": 80
   },
-  "ONT_assembly_with_flye.asm_coverage": 50,
+  "ONT_assembly_with_flye.asm_coverage": 500,
   "ONT_assembly_with_flye.fastqs": [
     "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_0_0.fastq.gz",
     "/home/dbest/Analysis/nanopore/data/Fastq/barcode01.chunk_0.fastq_runid_fa56e4219330fb211c031db58eaefe929df297bd_1_0.fastq.gz",
