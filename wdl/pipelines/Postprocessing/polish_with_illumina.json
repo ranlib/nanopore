@@ -23,7 +23,7 @@
   "polish_with_illumina.samplename": "S_aureus_JKD6159",
   "polish_with_illumina.threads": 64,
   "polish_with_illumina.wf_minimap2.addMDTagToSam": true,
-  "polish_with_illumina.wf_minimap2.dockerImage": "staphb/minimap2:2.25",
+  "polish_with_illumina.wf_minimap2.dockerImage": "staphb/minimap2:2.28",
   "polish_with_illumina.wf_minimap2.outputSam": true,
   "polish_with_illumina.wf_minimap2.presetOption": "sr",
   "polish_with_illumina.wf_minimap2.secondaryAlignment": false,
